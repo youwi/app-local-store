@@ -1,16 +1,13 @@
-koa-starter
+UED Store
 ===========
 
-A simple Koajs application starter template. 
+
+    app 后端代码
+    src 前端代码
+    server.js 服务器
 
 quick start
 =============
-
-**Clone koa-starter:**
-
-```sh
-$ git clone https://github.com/justmyfreak/koa-starter.git
-```
 
 **Install dependencies:**
 
@@ -18,17 +15,18 @@ $ git clone https://github.com/justmyfreak/koa-starter.git
 $ npm install
 ```
 
-**Run koa-starter:**
+** build FE :**
 
 ```sh
-$ npm start
+$ npm build
 ```
 
-or 
+**Run koa server:**
 
 ```sh
-$ node --harmony server.js
+$ npm server
 ```
+ 
 Open [http://localhost:3000](http://localhost:3000)
 
 **Run the test:**
@@ -51,4 +49,5 @@ koa-starter uses following npm package :
 Resources
 =========
 
+* 注意:需要node 7
 * [https://justmyfreak.com/koa-starter-a-koa-starting-template/](https://justmyfreak.com/koa-starter-a-koa-starting-template/)

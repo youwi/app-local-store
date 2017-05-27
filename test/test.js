@@ -1,6 +1,6 @@
 /* global describe, it */
 
-var app = require('../server');
+var app = require('../app/server');
 var request = require('supertest').agent(app.listen());
 
 describe('GET /', function () {
