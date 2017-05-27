@@ -5,7 +5,7 @@ import config from "../../config"
 export async function login(params) {
   return request(config.index.login, {
     method: 'post',
-    data:params,
+    data:{username:params.username,password:params.passwd},
   })
 }
 

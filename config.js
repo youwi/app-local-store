@@ -8,6 +8,14 @@ module.exports = {
     ERROR:-1,
     LOGIN_FAIL:0
   },
+  crowd:{
+    applicationName:"appdistributionsys",
+    applicationAuth:"appdistributionsys",
+    findUser:"http://crowd.wkzf:8095/crowd/rest/usermanagement/1/user",
+    auth:"http://crowd.wkzf:8095/crowd/rest/usermanagement/1/authentication",
+    sessionOnline:"http://crowd.wkzf:8095/crowd/rest/usermanagement/1/session"
+  },
+
   name: 'UED',
   prefix: 'uid',
   footerText: ' UED-Team © wkzf',
