@@ -4,7 +4,7 @@
   "description": "A simple Koajs application starter template.",
   "main": "index.js",
   "scripts": {
-    "server": "node --harmony app/server.js",
+    "server": "node --harmony Server/bin/www",
     "test": "mocha --harmony",
     "start": "roadhog server",
     "build": "roadhog build",
@@ -48,7 +48,7 @@
     "koa-router": "^7.1.1",
     "koa-static": "^3.0.0",
     "koa-views": "^5.2.1",
-    "pug": "^2.0.0-rc.1"
+    "pug": "^2.0.0-rc.1",
 
 
     "babel-cli": "6.9.0",
