@@ -1,6 +1,6 @@
 const Mock = require('mockjs')
 const Watch = require("watchjs")
-import config from '../config'
+import config from '../../config'
 
 export default function mockStorge(name, defaultValue) {
   let key = config.prefix + name

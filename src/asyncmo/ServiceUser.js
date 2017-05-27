@@ -1,6 +1,6 @@
 import { request } from '../utils'
 import qs from 'qs'
-import config from "../config"
+import config from "../../config"
 
 export async function login(params) {
   return request(config.index.login, {

@@ -1,5 +1,5 @@
 import {asyncAddLink, asyncAddView, asyncGetAllToc, asyncGetAllView, asyncDelView, asyncDelLink,asyncGetAllOperation, asyncUpdateOperation, asyncDeleteOperation} from "../asyncmo/ServicePimTypePage"
-import {STATE} from "../config"
+import {STATE} from "../../config"
 import {mergeArrayByIndex} from "../utils/ArrayUtil";
 export default {
 

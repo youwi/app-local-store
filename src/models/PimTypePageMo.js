@@ -1,5 +1,5 @@
 import {asyncGetAllTypes,asyncSaveType,asyncAddLink,asyncAddView,asyncGetTypeByTypeShortName,asyncDeleteType} from "../asyncmo/ServicePimTypePage"
-import {STATE} from "../config"
+import {STATE} from "../../config"
 import {mergeArrayByIndex} from "../utils/ArrayUtil";
 
 import { message } from 'antd';

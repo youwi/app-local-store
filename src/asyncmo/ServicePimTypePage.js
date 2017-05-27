@@ -1,5 +1,5 @@
 import { request } from '../utils'
-import config from "../config"
+import config from "../../config"
 
 
 

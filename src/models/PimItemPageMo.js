@@ -4,7 +4,7 @@ import {asyncGetAllItems,asyncUpdateItem,asyncAddItem,
   asyncGetAllOperationByItemId,asyncUpdateOperation,
   asyncDeleteOperation,
   asyncGetAllUsers} from "../asyncmo/ServicePimTypePage"
-import {STATE} from "../config"
+import {STATE} from "../../config"
 import {mergeArrayByIndex} from "../utils/ArrayUtil";
 import { message } from 'antd';
 export default {

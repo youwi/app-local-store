@@ -19,7 +19,7 @@ import  EditableTable from "../../components/EditableTable/EditableTable"
 import EditableTableForType from "../../components/EditableTable/EditableTableForType";
 import QueryPreview from "../../components/QueryPreview/QueryPreview";
 import request from "../../utils/request";
-import * as config from "../../config";
+import * as config from "../../../config";
 
 const Option=Select.Option
 class PimTypePage extends React.Component {

@@ -1,5 +1,5 @@
 import {asyncGetMyPermisssion} from "../asyncmo/ServicePermission";
-import {STATE} from "../config"
+import {STATE} from "../../config"
 export default {
 
   namespace: 'permission',

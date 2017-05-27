@@ -10,7 +10,7 @@ import {
   asyncReloadRealTime
 } from "../asyncmo/RealTime"
 import {asyncAllRule, asyncUpdateCurrentRule, asyncGetRuleById, asyncGetRuleBy,asyncGetSddmAPI} from "../asyncmo/ruleAsync"
-import {STATE} from "../config";
+import {STATE} from "../../config";
 import _ from "lodash"
 export default {
 

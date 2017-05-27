@@ -1,6 +1,6 @@
 import { request } from '../utils'
 
-import config from "../config"
+import config from "../../config"
 
 export async function asyncGetMyPermisssion(params) {
   return request(config.index.permission, {

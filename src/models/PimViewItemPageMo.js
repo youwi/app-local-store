@@ -1,5 +1,5 @@
 import {asyncGetAllItems, asyncUpdateItem, asyncAddItem, asyncGetAllItemsByTypeShortName,asyncDeleteItem} from "../asyncmo/ServicePimTypePage"
-import {STATE} from "../config"
+import {STATE} from "../../config"
 import {mergeArrayByIndex} from "../utils/ArrayUtil";
 import { message } from 'antd';
 export default {
