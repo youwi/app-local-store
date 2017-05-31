@@ -26,6 +26,24 @@ function paramExist(ctx, name) {
   }
   return false
 }
+router.get(config.index.permission, async function (ctx, next) {
+  let rba = _.clone(data)
+  if (paramExist(ctx, "token")) {
+    rba.msg = "OK"
+    rba.list=[ {
+        "id": 1,
+        "name": "UPDATE",
+        "desc": "更新"
+      }]
+    rba.state=1
+    ctx.body=rba
+  } else {
+    rba.msg = "error,token not present,you may need to login again"
+    rba.state = 0
+    ctx.body = rba
+  }
+
+})
 router.get(config.index.userinfo, async function (ctx, next) {
   let rba = _.clone(data)
   if (paramExist(ctx, "token")) {

@@ -25,11 +25,11 @@ app.router(RouteConfig);
 app.model(require('./models/UserMo'))
 app.model(require('./models/PermissionMo'))
 app.model(require('./models/DashboardMo'))
-app.model(require('./models/PimTypePageMo'))
-app.model(require('./models/PimItemPageMo'))
-app.model(require('./models/PimViewItemPageMo'))
-app.model(require('./models/PimTocPageMo'))
-app.model(require('./models/PimOperationMo'))
+// app.model(require('./models/PimTypePageMo'))
+// app.model(require('./models/PimItemPageMo'))
+// app.model(require('./models/PimViewItemPageMo'))
+// app.model(require('./models/PimTocPageMo'))
+// app.model(require('./models/PimOperationMo'))
 
 
 app.start('#root')

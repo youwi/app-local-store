@@ -43,7 +43,7 @@ export default {
       yield put({type: 'showLoading'})
       const data = yield call(userInfo, parse(payload))
       if (data.state==1) {
-        yield put({type: 'loginSuccess',payload: {user: {name: data.name}}
+        yield put({type: 'loginSuccess',payload: {user: {name: data['display-name']}}
         })
       } else {
         yield put({type: 'hideLoading'})

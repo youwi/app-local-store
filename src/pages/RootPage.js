@@ -17,6 +17,7 @@ import { Link } from 'dva/router'
 import RaTable from "../components/RaTable/RaTable";
 import MindChart from "../components/MindChart/MindChart";
 import {buildSSCData} from "./MapPage/ShareBuildFun";
+import DropZone from "../components/DropZone/DropZone";
 class RootPage extends React.Component  {
   constructor(props){
     super(props)
@@ -202,7 +203,7 @@ class RootPage extends React.Component  {
                 {/*/margin: '24px 16px '/*/}
                 <Content style={{ background: '#fff', padding: 24, minHeight: 280}}>
                   {/*{children||  <RaTable types={this.props.pimTypes} data={this.props.allItem}/>}*/}
-                  {children || <MindChart data={this.state.SSC}/>}
+                  {children|| <DropZone/> }
                   {/*<PimTypePage/>*/}
                   {/*<PimTypePage/>*/}
                   </Content>
