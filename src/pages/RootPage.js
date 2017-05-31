@@ -145,11 +145,11 @@ class RootPage extends React.Component  {
     let pintMenu= (
       <Menu key={this.state.newMenuDyKeyId} theme="dark" mode="inline" defaultSelectedKeys={this.state.defaultSelectedKeys} onClick={this.handleClickMenu} className="cus-sider-pint">
         {!this.hasPerssionType()?null:<Menu.Item key="types">
-          <Icon type="folder" /><Link to="types" style={{display: "inline-flex"}}><span className="nav-text">类别管理</span></Link>
+          <Icon type="folder" /><Link to="types" style={{display: "inline-flex"}}><span className="nav-text">--</span></Link>
           </Menu.Item>
         }
         <Menu.Item key="items">
-          <Icon type="appstore" /><Link to="items" style={{display: "inline-flex"}}><span className="nav-text">子类管理</span></Link>
+          <Icon type="appstore" /><Link to="items" style={{display: "inline-flex"}}><span className="nav-text">---</span></Link>
         </Menu.Item>
         {
           !this.hasPerssionOpration()?null:<Menu.Item key="operation">
@@ -158,12 +158,12 @@ class RootPage extends React.Component  {
         }
         {
           !this.hasPerssionManage()?null:<Menu.Item key="map">
-            <Icon type="line-chart" /><Link to="map" style={{display: "inline-flex"}}> <span className="nav-text">聚合图</span></Link>
+            <Icon type="line-chart" /><Link to="map" style={{display: "inline-flex"}}> <span className="nav-text">---</span></Link>
           </Menu.Item>
         }
         {
           !this.hasPerssionAPI()?null:<Menu.Item key="api">
-            <Icon type="link"/><Link to="api" style={{display: "inline-flex"}}> <span className="nav-text">接口视图</span></Link>
+            <Icon type="link"/><Link to="api" style={{display: "inline-flex"}}> <span className="nav-text">---</span></Link>
           </Menu.Item>
         }
 

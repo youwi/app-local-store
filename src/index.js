@@ -5,6 +5,7 @@ import 'antd/dist/antd.css';
 import {ip,httpip} from "./env.json"
 
 import RouteConfig from "./router"
+import config from "../config"
 
 import { message } from 'antd';
 
@@ -36,3 +37,4 @@ app.start('#root')
 
 if(app._store!=null) window._dispatch= app._store.dispatch
 
+if(document!=null) document.title=config.logoText

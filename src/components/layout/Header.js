@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import { Menu, Icon, Button } from 'antd'
 import { Link } from 'dva/router'
 import styles from './layout.less'
+import config from "../../../config"
 
 const SubMenu = Menu.SubMenu
 
@@ -14,7 +15,7 @@ export default function Header({  user, logout, switchSider, siderFold }) {
       </div>*/}
 
       <Menu className="header-menu" mode="horizontal" onClick={handleClickMenu}>
-        <Link to={"/"}><div className={styles.siderbutton}> Pim</div></Link>
+        <Link to={"/"}><div className={styles.siderbutton}> {config.logoText}</div></Link>
         <SubMenu style={{ float: 'right' }} title={<span>{user.name}<Icon type="user"/></span>} >
           <Menu.Item key="logout">
             <a>注销</a>
