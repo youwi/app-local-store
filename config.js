@@ -22,12 +22,16 @@ module.exports = {
   logoSrc: "UED store",
   logoText: 'UED Store System',
   needLogin: true,
+  uploadPath:"/opt/upload",
   index: {
     login: "/pim/login.rest",
     permission: "/pim/permissions.rest",
     logout: "/pim/logout.rest",
     userinfo: "/pim/userinfo.rest",
-    dashbroad:"/api/dashboard"
+    dashbroad:"/api/dashboard",
+    uploadzip:"/pim/upload.rest",
+    allProduct:"/pim/products.rest",
+    versionList:"pim/versions.rest"
   },
   pim: {
     deleteType:"/pim/delete_type.rest",

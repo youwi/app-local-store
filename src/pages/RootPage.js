@@ -18,6 +18,8 @@ import RaTable from "../components/RaTable/RaTable";
 import MindChart from "../components/MindChart/MindChart";
 import {buildSSCData} from "./MapPage/ShareBuildFun";
 import DropZone from "../components/DropZone/DropZone";
+import PreviewBox from "../components/PreviewBox/PreviewBox";
+import ProjectPage from "./ProjectPage/ProjectPage";
 class RootPage extends React.Component  {
   constructor(props){
     super(props)
@@ -93,6 +95,9 @@ class RootPage extends React.Component  {
       }
     }
     return false
+  }
+  upload=(files,version)=>{
+    this.props.dispatch({type:"upload/upload",files,version})
   }
 
   render=()=> {
@@ -203,7 +208,11 @@ class RootPage extends React.Component  {
                 {/*/margin: '24px 16px '/*/}
                 <Content style={{ background: '#fff', padding: 24, minHeight: 280}}>
                   {/*{children||  <RaTable types={this.props.pimTypes} data={this.props.allItem}/>}*/}
-                  {children|| <DropZone/> }
+                  {children|| <div>
+                    <ProjectPage/>
+                    <DropZone upload={this.upload}/>
+                    <PreviewBox links={this.props.links}/>
+                  </div> }
                   {/*<PimTypePage/>*/}
                   {/*<PimTypePage/>*/}
                   </Content>
@@ -235,4 +244,4 @@ RootPage.propTypes = {
   darkTheme:PropTypes.bool,
 }
 //  {showBread ? <Bread location={location} menu={menu}/> : <div style={{height:"16px"}}/>}
-export default connect(({app,typePage,itemPage,permission}) => ({app,...typePage,...itemPage,permissionList:permission.permissionList}))(RootPage)
+export default connect(({app,typePage,itemPage,permission,upload}) => ({app,...typePage,...itemPage,...upload,permissionList:permission.permissionList}))(RootPage)

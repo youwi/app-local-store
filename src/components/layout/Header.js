@@ -15,7 +15,7 @@ export default function Header({  user, logout, switchSider, siderFold }) {
       </div>*/}
 
       <Menu className="header-menu" mode="horizontal" onClick={handleClickMenu}>
-        <Link to={"/"}><div className={styles.siderbutton}> {config.logoText}</div></Link>
+        <Link to={"/"}> <div className={styles.siderbutton}><i className="fa fa-pied-piper-alt fa-15x" aria-hidden="true"/> {config.logoText}</div></Link>
         <SubMenu style={{ float: 'right' }} title={<span>{user.name}<Icon type="user"/></span>} >
           <Menu.Item key="logout">
             <a>注销</a>

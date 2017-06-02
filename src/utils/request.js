@@ -9,7 +9,9 @@ const Env= require("../env.json")
  * @param  {object} [options] The options we want to pass to "fetch"
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(url, options,isInBody) {
+export default function request(url, options,) {
+  let isInBody=options.isInBody
+  let isPostFile=options.isPostFile
 
   if(isFixed(url)){
     url = url.replace(/(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]):\d+/,Env.ip)
@@ -29,7 +31,21 @@ export default function request(url, options,isInBody) {
     }
   }
 
-  if (options.cross) {
+  if(isPostFile){
+    const   req =require('superagent').post(url)
+    if(options.files && options.files.forEach)
+      options.files.forEach(file => {
+        req.attach(file.name, file)
+      })
+   // req.type("multipart/form-data")
+   // req.send(options.data)
+    for(let fieldName in options.data){
+      req.field(fieldName,options.data[fieldName])
+    }
+    return req
+    //req.end()
+
+  }else if (options.cross) {
     //  Ajson.forjson(url)
   } else {
      let proms=Ajax.ajax({
@@ -60,6 +76,21 @@ export default function request(url, options,isInBody) {
     return proms
   }
 }
+
+function promisify(fn, receiver){
+  return function() {
+    for(let _len = argument.length, args = Array(_len), _key = 0; _key<_len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return new Promise(function (resolve, reject) {
+      fn.apply(receiver, [].concat(args,[function(err, res){
+        return err ? reject(err) : resolve(res);
+      }]));
+    });
+  };
+};
+
 /**
  * 错误处理方法
  * @param err

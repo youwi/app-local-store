@@ -3,7 +3,11 @@
 
 @Header-height:40px;
 
-
+:global{
+  .fa.fa-15x{
+      font-size: 1.5em;
+    }
+}
 :global .ant-layout-header{
   display: none;
 }
@@ -169,15 +173,15 @@
     box-shadow: @shadow-2;
     position: relative;
     .siderbutton{
-      padding-left: 29px;
+     // padding-left: 29px;
      // background: url(../../../public/cdn/logo_bar.png) no-repeat 0px 50%;
-      background: ~"URL(cdn/logo_bar.png) no-repeat 0px 50%";
+    //  background: ~"URL(cdn/logo_bar.png) no-repeat 0px 50%";
       background-size: 24px 24px;
 
       display: inline-block;
       color:white;
       height: @Header-height;
-      margin-left: 50px;
+     // margin-left: 50px;
       //width: 47px;
       line-height: @Header-height;
       text-align: center;

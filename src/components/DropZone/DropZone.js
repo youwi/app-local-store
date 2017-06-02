@@ -1,23 +1,30 @@
 
 import React from 'react'
 import Dropzone from "react-dropzone"
+import {Button,InputNumber} from "antd"
 import "./DropZone.less"
+import VersionNumber from "../VersionNumber/VersionNumber";
+
 export  default  class DropZone extends React.Component {
   constructor() {
     super()
     this.state = {
       accepted: [],
-      rejected: []
+      rejected: [],
+      version:"1.0.0"
     }
   }
   onDrop= (acceptedFiles,rejected)=> {
     this.setState({ accepted:acceptedFiles, rejected })
-    //this.props.
-    const req = request.post('/upload');
-    acceptedFiles.forEach(file => {
-      req.attach(file.name, file);
-    });
-    req.end(callback);
+
+  }
+  commit=()=>{
+    if(this.props.upload){
+      this.props.upload(this.state.accepted,this.state.version)
+    }
+  }
+  handleVersion=(version)=>{
+    this.setState({version})
   }
 
   render() {
@@ -36,8 +43,14 @@ export  default  class DropZone extends React.Component {
             </div>
           </Dropzone>
         </div>
-        <aside>
+        <div className="dropzone-btn">
+          <VersionNumber version={this.state.version} onChange={this.handleVersion}/>
+        </div>
+        <aside className="dropzone-btn">
 
+          <Button.Group>
+            <Button type="primary" disabled={!this.state.accepted.length>0} onClick={this.commit}>提交</Button>
+          </Button.Group>
         </aside>
       </section>
     );

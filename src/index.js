@@ -7,7 +7,9 @@ import {ip,httpip} from "./env.json"
 import RouteConfig from "./router"
 import config from "../config"
 
-import { message } from 'antd';
+import { message } from 'antd'
+
+import "react-image-gallery/styles/css/image-gallery.css"
 
 require("./mock")
 const app = dva({
@@ -26,6 +28,9 @@ app.router(RouteConfig);
 app.model(require('./models/UserMo'))
 app.model(require('./models/PermissionMo'))
 app.model(require('./models/DashboardMo'))
+app.model(require('./models/UploadMo'))
+app.model(require('./models/ProjectMo'))
+app.model(require('./models/ProductMo'))
 // app.model(require('./models/PimTypePageMo'))
 // app.model(require('./models/PimItemPageMo'))
 // app.model(require('./models/PimViewItemPageMo'))
