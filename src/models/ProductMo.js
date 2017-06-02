@@ -12,7 +12,7 @@ export default {
 
   subscriptions: {
     setup({dispatch, history}) {
-
+      dispatch({type:"getAllProducts"})
     }
   },
 
@@ -23,7 +23,12 @@ export default {
     *getAllProducts(arg, { call, put }){
       let data=yield asyncGetAllProduct()
       if(data.state=STATE.SUCCESS){
-        yield put({type:"pureUpdate",products:data.products})
+        data.list.forEach((item)=>{
+          item.projectShortName=item.itemShortName
+          item.projectName=item.itemDesc
+          item.link="/product/"+item.itemShortName
+        })
+        yield put({type:"pureUpdate",products:data.list})
       }
     },
     *getProductVersions(arg, { call, put }){

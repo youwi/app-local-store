@@ -11,16 +11,15 @@ import {classnames,menu} from '../utils'
 import '../components/layout/common.less'
 import { Layout, Menu, Icon } from 'antd';
 const { Header, Sider, Content } = Layout;
-import  PimTypePage from "./PimTypePage/PimTypePage"
-import  PimItemPage from "./PimItemPage/PimItemPage"
+
 import { Link } from 'dva/router'
 import RaTable from "../components/RaTable/RaTable";
 import MindChart from "../components/MindChart/MindChart";
-import {buildSSCData} from "./MapPage/ShareBuildFun";
+
 import DropZone from "../components/DropZone/DropZone";
 import PreviewBox from "../components/PreviewBox/PreviewBox";
-import ProjectPage from "./ProjectPage/ProjectPage";
-class RootPage extends React.Component  {
+import ProductPage from "./ProductPage/ProductPage";
+ class RootPage extends React.Component  {
   constructor(props){
     super(props)
     this.state = {
@@ -36,7 +35,7 @@ class RootPage extends React.Component  {
     });
   }
   componentWillReceiveProps(next) {
-    this.state.SSC=buildSSCData(next.allItem)
+
     this.routeHiFix(next)
   }
   handleClickMenu=(e)=>{
@@ -99,6 +98,9 @@ class RootPage extends React.Component  {
   upload=(files,version)=>{
     this.props.dispatch({type:"upload/upload",files,version})
   }
+   isRootPath=()=>{
+     return window.location.href.indexOf("#/?")>0
+   }
 
   render=()=> {
     let {children, location, dispatch, app}=this.props
@@ -191,11 +193,11 @@ class RootPage extends React.Component  {
         <div className={styles.main}>
           <HeaderC {...headerProps}/>
           <Layout style={{    height: "calc(100vh - 41px)"}} >
-            <Sider collapsible collapsed={this.state.collapsed}  onCollapse={this.toggle}   breakpoint="lg" className="cus-sider" >
-              <div className="logo"/>
-              {typeMenu}
-              {pintMenu}
-            </Sider>
+            {/*<Sider collapsible collapsed={this.state.collapsed}  onCollapse={this.toggle}   breakpoint="lg" className="cus-sider" >*/}
+              {/*<div className="logo"/>*/}
+              {/*{typeMenu}*/}
+              {/*{pintMenu}*/}
+            {/*</Sider>*/}
             <Layout>
               <Header style={{background: '#fff', padding: 0}}>
                 <Icon
@@ -206,17 +208,16 @@ class RootPage extends React.Component  {
               </Header>
               <Content style={{ minHeight: 280,display: "flex",flexDirection: "column",flex: "auto"}}>
                 {/*/margin: '24px 16px '/*/}
-                <Content style={{ background: '#fff', padding: 24, minHeight: 280}}>
+                <Content style={{ background: '#fff', padding: 0, minHeight: 280,display: "flex"}}>
                   {/*{children||  <RaTable types={this.props.pimTypes} data={this.props.allItem}/>}*/}
                   {children|| <div>
-                    <ProjectPage/>
-                    <DropZone upload={this.upload}/>
-                    <PreviewBox links={this.props.links}/>
+                    <ProductPage/>
                   </div> }
                   {/*<PimTypePage/>*/}
                   {/*<PimTypePage/>*/}
                   </Content>
-                <Footer/>
+                {this.isRootPath()?<Footer/>:null}
+
               </Content>
             </Layout>
           </Layout>

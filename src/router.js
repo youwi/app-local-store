@@ -6,6 +6,7 @@ import Dashboard from './pages/dashboard/dashboard'
 
 import Ico from './pages/ui-test/ico'
 import About from "./pages/about"
+import VersionsPage from "./pages/VersionsPage/VersionsPage";
 
 export default function ({ history }) {
 
@@ -16,6 +17,7 @@ export default function ({ history }) {
         <Route path="/dashboard" component={ Dashboard }/>
         <Route path="/ui/ico" component={Ico}/>
         <Route path="/about" component={About}/>
+        <Route path="/product/:productShortName" component={VersionsPage}/>
         <Route path="*" component={ Error } />
       </Route>
     </Router>
