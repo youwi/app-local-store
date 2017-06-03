@@ -16,4 +16,9 @@ export async function asyncGetProductVersion(params) {
   })
 }
 
-
+export async function asyncGetAllImages(params) {
+  return request(config.index.allVersionImage, {
+    method: 'get',
+    data:params
+  })
+}

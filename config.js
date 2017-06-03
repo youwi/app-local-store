@@ -31,7 +31,8 @@ module.exports = {
     dashbroad:"/api/dashboard",
     uploadzip:"/upload.rest",
     allProduct:"/products.rest",
-    versionList:"/versions.rest"
+    versionList:"/versions.rest",
+    allVersionImage:"/versions/images.rest",  //获取所有图片,用于预览
   },
   pim: {
     products:"http://pim.wkzf:8102/products",

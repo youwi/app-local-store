@@ -77,5 +77,44 @@ router.get(config.index.allProduct, async function (ctx, next) {
   ctx.body =JSON.parse(pimProducts.text)
 })
 
+router.get(config.index.allVersionImage, async function (ctx, next) {
+  let rba = _.clone(data)
+
+  if (paramExist(ctx, "product") &&    paramExist(ctx, "version") &&  paramExist(ctx, "tag") ) {
+    let version=paramExist(ctx, "version")
+    let product=paramExist(ctx, "product")
+    let tag=paramExist(ctx, "tag")
+
+    let links =[]
+    travel(path.join(config.uploadPath,product,version,tag),(pathName)=>{
+      links.push(pathName.replace(config.uploadPath,""))
+    })
+
+    rba.state = 1
+    rba.links = links
+  }else{
+    rba.state=-3
+    rba.msg="product or version or tag not present"
+  }
+
+  ctx.body =rba
+})
+
+/**
+ * 递归目录,回调为文件,
+ * @param dir
+ * @param callback
+ */
+function travel(dir, callback) {
+  fs.readdirSync(dir).forEach(function (file) {
+    var pathname = path.join(dir, file);
+
+    if (fs.statSync(pathname).isDirectory()) {
+      travel(pathname, callback);
+    } else {
+      callback(pathname);
+    }
+  });
+}
 
 module.exports = router

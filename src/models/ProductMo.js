@@ -1,4 +1,4 @@
-import { asyncGetAllProduct,asyncGetProductVersion} from "../asyncmo/ServiceProduct"
+import { asyncGetAllProduct,asyncGetProductVersion,asyncGetAllImages} from "../asyncmo/ServiceProduct"
 import {STATE} from "../../config"
 
 import {ip,httpip} from "../env.json"
@@ -37,8 +37,11 @@ export default {
         yield put({type:"pureUpdate",versions:data.versions,versionT:data.versionT})
       }
     },
-    *selectProject(arg,{call,put}){
-
+    *scanAllImages(arg,{call,put}){
+      let data=yield asyncGetAllImages(arg)
+      if(data.state=STATE.SUCCESS){
+        yield put({type:"pureUpdate",allImages:data.links})
+      }
     }
   },
 
