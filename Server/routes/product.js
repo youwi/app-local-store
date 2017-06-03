@@ -38,10 +38,24 @@ function paramExist(ctx, name) {
 router.get(config.index.versionList, async function (ctx, next) {
   let rba = _.clone(data)
   if (paramExist(ctx, "product")) {
-    let product=paramExist(ctx, "version")
-    let versions=fs.readdirSync(path.join(config.uploadPath,product))
+    let product=paramExist(ctx, "product")
+    let versions=[]
+    let versionT={}
     rba.state=1
+    try{
+      versions=fs.readdirSync(path.join(config.uploadPath,product))
+      for(let version of versions){
+        let tags=fs.readdirSync(path.join(config.uploadPath,product,version))
+        versionT[version]=tags
+      }
+    }catch(e){
+      rba.state=-3
+      rba.msg=e.message
+      console.error(e)
+    }
+
     rba.versions=versions
+    rba.versionT=versionT
     ctx.body =rba
   } else {
     rba.msg = "error,product not present"

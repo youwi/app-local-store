@@ -95,9 +95,7 @@ import ProductPage from "./ProductPage/ProductPage";
     }
     return false
   }
-  upload=(files,version)=>{
-    this.props.dispatch({type:"upload/upload",files,version})
-  }
+
    isRootPath=()=>{
      return window.location.href.indexOf("#/?")>0
    }

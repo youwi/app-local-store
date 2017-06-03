@@ -16,7 +16,7 @@ class ProductPage extends React.Component {
   onSelect = (name) => {
     this.props.dispatch({type: "device/pureUpdate", deviceList: []})
     this.props.dispatch({type: "device/pureUpdate", currentProjectId: this.getProjectIdByProjectShortName(name), currentProject: name})
-    this.props.dispatch({type: "product/selectProject", project: name})
+    this.props.dispatch({type: "product/getProductVersions", product: name})
   }
   getProjectIdByProjectShortName = (name) => {
     for (let item of this.props.products) {

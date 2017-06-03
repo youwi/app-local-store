@@ -36,10 +36,12 @@ function paramExist(ctx, name) {
 }
 router.post(config.index.uploadzip, async function (ctx, next) {
   let rba = _.clone(data)
-  if (paramExist(ctx, "version")) {
+  if (paramExist(ctx, "version") && paramExist(ctx, "product") && paramExist(ctx, "tag")) {
     let version=paramExist(ctx, "version")
+    let product=paramExist(ctx, "product")
+    let tag=paramExist(ctx, "tag")
 
-    let versionDir=path.join(config.uploadPath,version)
+    let versionDir=path.join(config.uploadPath,product,version,tag)
     if(!fs.existsSync(versionDir)){
       fs.mkdirSync(versionDir)
     }
@@ -51,7 +53,7 @@ router.post(config.index.uploadzip, async function (ctx, next) {
         let newpath =path.join(versionDir,file.name);
         let stream = fs.createWriteStream(newpath);//创建一个可写流
         fs.createReadStream(file.path).pipe(stream);//可读流通过管道写入可写流
-        nameList.push(path.join(version,name))
+        nameList.push(path.join(product,version,name))
       }
     }
 

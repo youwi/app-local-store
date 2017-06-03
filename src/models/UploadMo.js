@@ -23,14 +23,15 @@ export default {
     *getAllProducts(){
 
     },
-    *upload(files,{call,put}){
-      let req=yield asyncUpload(files)
+    *upload(obj,{call,put}){
+      let req=yield asyncUpload(obj)
       let data=req.body
       if(data.state=STATE.SUCCESS){
         let newLinks=data.links&&data.links.map((link)=>{
           return httpip+"/"+link
         })
         yield put({type:"pureUpdate",links:newLinks||[]})
+        yield put({type:"product/getProductVersions",product:obj.product})
       }
     }
   },

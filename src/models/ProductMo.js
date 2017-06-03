@@ -34,8 +34,11 @@ export default {
     *getProductVersions(arg, { call, put }){
       let data=yield asyncGetProductVersion(arg)
       if(data.state=STATE.SUCCESS){
-        yield put({type:"pureUpdate",versions:data.versions})
+        yield put({type:"pureUpdate",versions:data.versions,versionT:data.versionT})
       }
+    },
+    *selectProject(arg,{call,put}){
+
     }
   },
 
