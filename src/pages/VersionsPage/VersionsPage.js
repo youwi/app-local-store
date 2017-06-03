@@ -17,6 +17,9 @@ class VersionsPage extends React.Component {
   constructor(props) {
     super();
   }
+  componentDidMount=()=>{
+    this.props.dispatch({type: "product/getProductVersions", product:this.props.params.productShortName})
+  }
 
   onSelect = (name) => {
 
@@ -128,5 +131,5 @@ class VersionsPage extends React.Component {
 
 VersionsPage.propTypes = {projectList: PropTypes.array};
 
-export default connect(({product}) => product)(VersionsPage);
+export default connect(({product,upload}) =>{return {...product,...upload}})(VersionsPage);
 //({projectList})=>({projectList})

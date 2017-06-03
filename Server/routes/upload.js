@@ -53,7 +53,7 @@ router.post(config.index.uploadzip, async function (ctx, next) {
         let newpath =path.join(versionDir,file.name);
         let stream = fs.createWriteStream(newpath);//创建一个可写流
         fs.createReadStream(file.path).pipe(stream);//可读流通过管道写入可写流
-        nameList.push(path.join(product,version,name))
+        nameList.push(path.join(product,version,tag,file.name))
       }
     }
 
