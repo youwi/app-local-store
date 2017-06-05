@@ -4,7 +4,7 @@ import Dropzone from "react-dropzone"
 import {Button,InputNumber,Input,Icon} from "antd"
 import "./DropZone.less"
 import VersionNumber from "../VersionNumber/VersionNumber";
-import ImgPreview from "../ImgPreview/ImgPreview";
+import ImgPreview from "../ImgFilePreview/ImgPreview";
 
 export  default  class DropZone extends React.Component {
   constructor() {

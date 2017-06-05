@@ -2,20 +2,28 @@ import React, {PropTypes} from 'react';
 import ReactDom from "react-dom"
 import {connect} from 'dva';
 
-import {Layout,Menu,Icon} from "antd"
+import {Layout,Menu,Icon,Button,Tooltip} from "antd"
 import  "./VersionPage.less"
 
 import DropZone from "../../components/DropZone/DropZone";
 import PreviewBox from "../../components/PreviewBox/PreviewBox";
 import {ip,httpip} from "../../env.json"
 import config from "../../../config"
+import FlowImgBox from "../../components/FlowImgBox/FlowImgBox";
+
 const SubMenu = Menu.SubMenu;
 const MenuItemGroup = Menu.ItemGroup;
+
+const MODE={uploadPage:"uploadPage",indexPage:"indexPage",imagesPage:"imagesPage"}
+
 class VersionsPage extends React.Component {
   state = {
+
     collapsed: true,
-    indexPage:null
+    indexPage:null,
+    showMode:"uploadPage", // ,imagesPage
   }
+
 
 
   constructor(props) {
@@ -42,12 +50,18 @@ class VersionsPage extends React.Component {
       collapsed: !this.state.collapsed,
     });
   }
+  showAllImages=(e,version,tag)=>{
+    e.stopPropagation&&e.stopPropagation()
+    let product=this.props.params.productShortName
+    this.props.dispatch({type:"product/scanAllImages",product,version,tag})
+    this.setState({showMode:MODE.imagesPage})
+  }
   dispatchVersionTagPreview=(item)=>{
     let product=this.props.params.productShortName
     let version=item.keyPath[1]
     let tag=item.key
     let indexPage=httpip+"/"+product+"/"+version+"/"+tag+"/"+"index.html"
-    this.setState({indexPage})
+    this.setState({indexPage,showMode:MODE.indexPage})
 
     this.props.dispatch({type:"product/scanAllImages",product,version,tag})
   }
@@ -57,7 +71,11 @@ class VersionsPage extends React.Component {
       for(let version in versionT){
         let sub=versionT[version]
           out.push(<SubMenu key={version} title={<span><Icon type="folder" /><span>{version}</span></span>}>
-            {sub.map(name=><Menu.Item key={name}>{name}</Menu.Item>)}
+            {sub.map(name=><Menu.Item key={name}><span style={{width:"180px"}}>{name}</span>
+              <Tooltip placement="top" title={"显示所有图片"}>
+                <Icon className="menu-btn" style={{marginRight: "0px"}} type="link" onClick={(e)=>this.showAllImages(e,version,name)}/>
+              </Tooltip>
+            </Menu.Item>)}
           </SubMenu>)
       }
       return <Menu theme="dark" mode="inline" onClick={this.dispatchVersionTagPreview}>{out}</Menu>
@@ -81,6 +99,18 @@ class VersionsPage extends React.Component {
       minHeight:this.state.contentHeight||"500px",
       width:'100%'
     }
+    let contnetStyle={background:"#FFF",padding:this.state.indexPage==null?"12px":"0px"}
+    let showDom="";
+    if(this.state.showMode===MODE.indexPage){
+      showDom=<iframe src={this.state.indexPage} style={iStyle}/>
+    }else if(this.state.showMode===MODE.uploadPage){
+      showDom=<div>
+        <DropZone upload={this.upload}/>
+        <PreviewBox links={this.props.links}/>
+      </div>
+    }else if(this.state.showMode===MODE.imagesPage){
+      showDom=<FlowImgBox links={this.props.allImages}/>
+    }
     return (
 
         <Layout >
@@ -90,18 +120,9 @@ class VersionsPage extends React.Component {
               <div style={{    overflow: "scroll"}}>  {this.buildMenu(this.props.versions,this.props.versionT)}</div>
 
             </Layout.Sider>
-
-
           <Layout>
-            <Layout.Content style={{background:"#FFF",padding:this.state.indexPage==null?"12px":"0px"}} ref="Content">
-              {this.state.indexPage!=null?
-                <iframe src={this.state.indexPage} style={iStyle}/>
-                :<div>
-                  <DropZone upload={this.upload}/>
-                  <PreviewBox links={this.props.links}/>
-                </div>
-              }
-
+            <Layout.Content style={contnetStyle} ref="Content">
+              {showDom}
             </Layout.Content>
           </Layout>
 

@@ -44,10 +44,16 @@ router.get(config.index.versionList, async function (ctx, next) {
     rba.state=1
     try{
       versions=fs.readdirSync(path.join(config.uploadPath,product))
+      let versions_clone=[]
       for(let version of versions){
-        let tags=fs.readdirSync(path.join(config.uploadPath,product,version))
-        versionT[version]=tags
+        let pathName=path.join(config.uploadPath,product,version)
+        if(fs.existsSync(pathName)  && fs.statSync(pathName).isDirectory()){
+          versionT[version]=fs.readdirSync(pathName)
+          versions_clone.push(version)
+        }else{
+        }
       }
+      versions=versions_clone
     }catch(e){
       rba.state=-3
       rba.msg=e.message

@@ -2,6 +2,7 @@ import { asyncGetAllProduct,asyncGetProductVersion,asyncGetAllImages} from "../a
 import {STATE} from "../../config"
 
 import {ip,httpip} from "../env.json"
+import config from "../../config"
 export default {
 
   namespace: 'product',
@@ -40,7 +41,12 @@ export default {
     *scanAllImages(arg,{call,put}){
       let data=yield asyncGetAllImages(arg)
       if(data.state=STATE.SUCCESS){
-        yield put({type:"pureUpdate",allImages:data.links})
+        let allImagesLink=data.links.map(link=>{
+          if(!link.endWith(".html"))
+            return  httpip+link
+          else return null
+        }).filter((a)=>a!=null)
+        yield put({type:"pureUpdate",allImages:allImagesLink})
       }
     }
   },
@@ -54,4 +60,12 @@ export default {
 };
 
 
-
+String.prototype.startWith=function(str){
+  var reg=new RegExp("^"+str);
+  return reg.test(this);
+}
+//测试ok，直接使用str.endWith("abc")方式调用即可
+String.prototype.endWith=function(str){
+  var reg=new RegExp(str+"$");
+  return reg.test(this);
+}
