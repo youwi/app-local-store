@@ -105,8 +105,8 @@ class VersionsPage extends React.Component {
       showDom=<iframe src={this.state.indexPage} style={iStyle}/>
     }else if(this.state.showMode===MODE.uploadPage){
       showDom=<div>
-        <DropZone upload={this.upload}/>
-        <PreviewBox links={this.props.links}/>
+        <DropZone upload={this.upload} state={this.props.uploading}/>
+        {/*<PreviewBox links={this.props.links}/>*/}
       </div>
     }else if(this.state.showMode===MODE.imagesPage){
       showDom=<FlowImgBox links={this.props.allImages}/>

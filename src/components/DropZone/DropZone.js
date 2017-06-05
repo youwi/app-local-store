@@ -1,7 +1,7 @@
 
 import React from 'react'
 import Dropzone from "react-dropzone"
-import {Button,InputNumber,Input,Icon} from "antd"
+import {Button,InputNumber,Input,Icon,message} from "antd"
 import "./DropZone.less"
 import VersionNumber from "../VersionNumber/VersionNumber";
 import ImgPreview from "../ImgFilePreview/ImgPreview";
@@ -13,11 +13,15 @@ export  default  class DropZone extends React.Component {
       accepted: [],
       rejected: [],
       version:"1.0.0",
+      disableTag:false,
     }
   }
   onDrop= (acceptedFiles,rejected)=> {
-
+    if(this.isZipFile(this.state.accepted)){
+      this.state.accepted=[]
+    }
     let accepted=[...acceptedFiles,...this.state.accepted]
+    let disableTag=false
     for(let i=0;i<accepted.length;i++){
       for(let j=i+1;j<accepted.length;j++){
         if(accepted[i].name==accepted[j].name){
@@ -29,11 +33,30 @@ export  default  class DropZone extends React.Component {
         let fileName=accepted[i].name
         let arr=fileName.split(".zip")
         accepted.length=1
-        this.setState({tag:arr[0]})
+        disableTag=true
+        this.setState({tag:arr[0],})
       }
     }
 
-    this.setState({ accepted, rejected })
+    this.setState({ accepted, rejected,disableTag })
+  }
+  componentWillReceiveProps(props){
+    if(props.state===3){
+      message.info("Upload Success")
+      this.setState({accepted:[]})
+    }else if(props.state===-1){
+      message.error("Upload Failed")
+    }
+  }
+  isZipFile=(arr)=>{
+    if(arr==null) return false
+   for(let file of arr){
+     if(this.endWith(file.name,".zip")){
+       return true
+     }else{
+       return false
+     }
+   }
   }
   endWith=(str,pix)=> {
     var reg = new RegExp(pix + "$");
@@ -96,10 +119,11 @@ export  default  class DropZone extends React.Component {
         </div>
         <div className="dropZone-btn">
           <div>
-            <Input onChange={this.changeTag} addonBefore={"Tag/Type:"} defaultValue={this.state.tag} value={this.state.tag}/>
+            {!this.state.disableTag&&<Input onChange={this.changeTag} addonBefore={"Tag/Type:"} defaultValue={this.state.tag} value={this.state.tag}/>}
           </div>
         </div>
-         <ImgPreview files={this.state.accepted}  delete={this.deleteById}/>
+            {!this.state.disableTag&&<ImgPreview files={this.state.accepted}  delete={this.deleteById}/>}
+
         <aside className="dropZone-btn">
 
           <Button.Group>

@@ -47,7 +47,7 @@ router.post(config.index.uploadzip, async function (ctx, next) {
     let tagDir=path.join(config.uploadPath,product,version,tag)
     let versionDir=path.join(config.uploadPath,product,version)
     if(!fs.existsSync(tagDir)){
-      fs.mkdirSync(tagDir)
+      mkdirsSync(tagDir)
     }
 
     let nameList=[]
@@ -57,8 +57,8 @@ router.post(config.index.uploadzip, async function (ctx, next) {
         let newpath =path.join(tagDir,file.name);
 
         if(endWith(file.name,".zip")){
-          let stream = fs.createWriteStream(path.join(versionDir,file.name));//创建一个可写流
-          fs.createReadStream(file.path).pipe(stream);//可读流通过管道写入可写流
+          // let stream = fs.createWriteStream(path.join(versionDir,file.name));//创建一个可写流
+          // fs.createReadStream(file.path).pipe(stream);//可读流通过管道写入可写流
 
           let  zipFile = new adm_zip(file.path);
           zipFile.extractAllTo(versionDir, /*overwrite*/true);
@@ -85,6 +85,37 @@ function endWith(str,pix) {
   let reg=new RegExp(pix+"$");
   return reg.test(str);
 }
+var mkdirs = function(dirpath, mode, callback) {
+  fs.exists(dirpath, function(exists) {
+    if(exists) {
+      callback(dirpath);
+    } else {
+      //尝试创建父目录，然后再创建当前目录
+      mkdirs(path.dirname(dirpath), mode, function(){
+        fs.mkdir(dirpath, mode, callback);
+      });
+    }
+  });
+};
 
-
+function mkdirsSync(dirpath, mode) {
+  if (!fs.existsSync(dirpath)) {
+    var pathtmp;
+    dirpath.split(path.sep).forEach(function(dirname) {
+      if(dirname==="") return
+      if (pathtmp) {
+        pathtmp = path.join(pathtmp, dirname);
+      }
+      else {
+        pathtmp = dirname;
+      }
+      if (!fs.existsSync(pathtmp)) {
+        if (!fs.mkdirSync(pathtmp, mode)) {
+          return false;
+        }
+      }
+    });
+  }
+  return true;
+}
 module.exports = router

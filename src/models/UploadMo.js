@@ -32,6 +32,10 @@ export default {
         })
         yield put({type:"pureUpdate",links:newLinks||[]})
         yield put({type:"product/getProductVersions",product:obj.product})
+        yield put({type:"pureUpdate",uploadingMsg:"Upload Success",uploading:3})
+        yield put({type:"pureUpdate",uploadingMsg:"Upload Success",uploading:0})
+      }else{
+        yield put({type:"pureUpdate",uploadingMsg:"Upload Failed",uploading:-1})
       }
     }
   },
@@ -43,6 +47,4 @@ export default {
   }
 
 };
-
-
 
