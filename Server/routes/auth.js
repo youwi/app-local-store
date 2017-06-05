@@ -72,26 +72,31 @@ router.post(config.index.login, async function (ctx, next) {
   if (paramExist(ctx, "username") && paramExist(ctx, "password")) {
     let username = paramExist(ctx, "username")
     let password = paramExist(ctx, "password")
+    try {
 
-    let asoUser=await crowdFindUser(username)
-    if(asoUser.name==null){
-      rba.state=0
-      rba.msg=asoUser.message
-      ctx.body=_.assign(rba,asoUser)
-      return
-    }
-    let asoToken=await  crowdCreateToken(username,password)
-    if(asoToken.token==null){
-      rba.state=0
-      rba.msg=asoToken.message
-      ctx.body=_.assign(rba,asoToken)
-      return
-    }
+      let asoUser = await crowdFindUser(username)
+      if (asoUser.name == null) {
+        rba.state = 0
+        rba.msg = asoUser.message
+        ctx.body = _.assign(rba, asoUser)
+        return
+      }
+      let asoToken = await  crowdCreateToken(username, password)
+      if (asoToken.token == null) {
+        rba.state = 0
+        rba.msg = asoToken.message
+        ctx.body = _.assign(rba, asoToken)
+        return
+      }
 
-    rba.state=1
-    let asoOut= _.assign(rba, asoToken,asoUser)
-    ctx.body =asoOut
-    AuthList[username] =asoOut
+      rba.state = 1
+      let asoOut = _.assign(rba, asoToken, asoUser)
+      ctx.body = asoOut
+      AuthList[username] = asoOut
+    }catch (e){
+      ctx.body={state:-1,msg:e.message}
+      console.log(e.message)
+    }
   } else {
     rba.msg = "error,username or password not present"
     rba.state = 0

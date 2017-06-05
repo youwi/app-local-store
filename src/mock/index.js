@@ -9,4 +9,4 @@ Mock.mock(RegExp(config.index.login),  require("./login.rest.json"))*/
 
 Mock.mock(RegExp(config.index.dashbroad),  require("./doashbroad.rest"))
 
-// Mock.mock(RegExp(config.index.userinfo),  require("./userinfo.rest.json"))
+ Mock.mock(RegExp(config.index.userinfo),  require("./userinfo.rest.json"))

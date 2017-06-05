@@ -12,6 +12,9 @@ const data = {
   msg: "nothing",
 
 }
+/**
+* 判断参数是否存在,并返回参数
+* */
 function paramExist(ctx, name) {
   if (ctx.query) {
     if (ctx.query[name] != null) {
@@ -35,6 +38,10 @@ function paramExist(ctx, name) {
   }
   return false
 }
+/**
+ * 获取所有版本列表,2级目录,
+ * 包括tags目录.
+ */
 router.get(config.index.versionList, async function (ctx, next) {
   let rba = _.clone(data)
   if (paramExist(ctx, "product")) {
@@ -73,6 +80,10 @@ router.get(config.index.versionList, async function (ctx, next) {
   }
 })
 
+
+/**
+ * 所有的产品列表,默认从PIM上取数据
+ */
 router.get(config.index.allProduct, async function (ctx, next) {
   let rba = _.clone(data)
   // let rbbcc= {...data}
@@ -81,9 +92,31 @@ router.get(config.index.allProduct, async function (ctx, next) {
   rba.state = 1
   rba.products = products
   //ctx.body =rba
-  let pimProducts = await request.get(config.pim.products)
+  try{
+    let pimProducts = await request.get(config.pim.products).timeout({ response: 5000,   deadline: 60000, })
+    ctx.body =JSON.parse(pimProducts.text)
+  }catch (e){
+    ctx.body={
+      "state": 1,
+      "list": [
+        {
+          "itemId": 5,
+          "disabled": null,
+          "typeId": 2,
+          "itemMainParentId": 2,
+          "itemBlockIds": null,
+          "itemMultiParentIds": null,
+          "itemName": "WKZF App",
+          "itemShortName": "WKAPP",
+          "itemDesc": "悟空找房移动端",
+          "itemProps": null
+        },
+      ],
+      "msg": "ok"
+    }
+    console.log(e.message)
+  }
 
-  ctx.body =JSON.parse(pimProducts.text)
 })
 
 router.get(config.index.allVersionImage, async function (ctx, next) {
