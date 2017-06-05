@@ -48,7 +48,10 @@ router.get(config.index.versionList, async function (ctx, next) {
       for(let version of versions){
         let pathName=path.join(config.uploadPath,product,version)
         if(fs.existsSync(pathName)  && fs.statSync(pathName).isDirectory()){
-          versionT[version]=fs.readdirSync(pathName)
+          let tags=fs.readdirSync(pathName)
+          versionT[version]=tags.filter((file)=>
+            fs.statSync(path.join(config.uploadPath,product,version,file)).isDirectory() && file!=="__MACOSX"
+          )
           versions_clone.push(version)
         }else{
         }

@@ -35,7 +35,7 @@ export  default  class FlowImgBox extends React.Component {
           <Card style={{ width: 240 }} bodyStyle={{ padding: 0 }}>
           <div className="custom-image">
           {
-            this.isHtmlPage(link)?<Icon type="file" />:<img onClick={()=>this.setState({isOpen:true,currLink:link})} alt="example" width="100%" src={link} />
+            this.isHtmlPage(link)?<Icon type="file" />:<img onClick={()=>this.setState({isOpen:true,currLink:link})} alt={this.getLastName(link)} width="100%" src={link} />
           }
           </div>
           <div className="custom-card">

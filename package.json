@@ -29,6 +29,7 @@
   },
   "homepage": "https://github.com/justmyfreak/koa-starter",
   "dependencies": {
+    "adm-zip": "^0.4.7",
     "antd": "^2.10.2",
     "babel-cli": "6.9.0",
     "babel-polyfill": "^6.9.1",
@@ -85,6 +86,7 @@
     "robe-ajax": "^1.0.1",
     "statuses": "^1.3.1",
     "superagent": "^3.5.2",
+    "unzip": "^0.1.11",
     "watchjs": "0.0.0",
     "waterline": "^0.10.21",
     "whatwg-fetch": "^1.0.0"

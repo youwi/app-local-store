@@ -28,6 +28,7 @@ export  default  class DropZone extends React.Component {
       if(this.endWith(accepted[i].name,".zip")){
         let fileName=accepted[i].name
         let arr=fileName.split(".zip")
+        accepted.length=1
         this.setState({tag:arr[0]})
       }
     }

@@ -6,6 +6,9 @@ const fetch = require('isomorphic-fetch');
 const Base64 = require('js-base64').Base64;
 const fs=require('fs')
 const path=require('path')
+const unzip = require("unzip");
+const adm_zip = require('adm-zip');
+
 const data = {
   state: 0,
   msg: "nothing",
@@ -41,18 +44,29 @@ router.post(config.index.uploadzip, async function (ctx, next) {
     let product=paramExist(ctx, "product")
     let tag=paramExist(ctx, "tag")
 
-    let versionDir=path.join(config.uploadPath,product,version,tag)
-    if(!fs.existsSync(versionDir)){
-      fs.mkdirSync(versionDir)
+    let tagDir=path.join(config.uploadPath,product,version,tag)
+    let versionDir=path.join(config.uploadPath,product,version)
+    if(!fs.existsSync(tagDir)){
+      fs.mkdirSync(tagDir)
     }
 
     let nameList=[]
     if(ctx.request.body.files){
       for(let name in ctx.request.body.files){
         let file=ctx.request.body.files[name]
-        let newpath =path.join(versionDir,file.name);
-        let stream = fs.createWriteStream(newpath);//创建一个可写流
-        fs.createReadStream(file.path).pipe(stream);//可读流通过管道写入可写流
+        let newpath =path.join(tagDir,file.name);
+
+        if(endWith(file.name,".zip")){
+          let stream = fs.createWriteStream(path.join(versionDir,file.name));//创建一个可写流
+          fs.createReadStream(file.path).pipe(stream);//可读流通过管道写入可写流
+
+          let  zipFile = new adm_zip(file.path);
+          zipFile.extractAllTo(versionDir, /*overwrite*/true);
+        }else{
+          let stream = fs.createWriteStream(newpath);//创建一个可写流
+          fs.createReadStream(file.path).pipe(stream);//可读流通过管道写入可写流
+        }
+
         nameList.push(path.join(product,version,tag,file.name))
       }
     }
@@ -67,7 +81,10 @@ router.post(config.index.uploadzip, async function (ctx, next) {
   }
 
 })
-
+function endWith(str,pix) {
+  let reg=new RegExp(pix+"$");
+  return reg.test(str);
+}
 
 
 module.exports = router
