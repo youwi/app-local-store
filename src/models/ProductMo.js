@@ -41,11 +41,13 @@ export default {
     *scanAllImages(arg,{call,put}){
       let data=yield asyncGetAllImages(arg)
       if(data.state=STATE.SUCCESS){
-        let allImagesLink=data.links.map(link=>{
-          if(!link.endWith(".html"))
-            return  httpip+link
-          else return null
-        }).filter((a)=>a!=null)
+        // let allImagesLink=data.links.map(link=>{
+        //   if(!link.endWith(".html"))
+        //     return  httpip+link
+        //   else return null
+        // }).filter((a)=>a!=null)
+        data.links.sort((link)=>link.endWith(".html"))
+        let allImagesLink=data.links.map(link=>httpip+link)
         yield put({type:"pureUpdate",allImages:allImagesLink})
       }
     }

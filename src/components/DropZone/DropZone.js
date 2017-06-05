@@ -25,10 +25,19 @@ export  default  class DropZone extends React.Component {
           j--
         }
       }
+      if(this.endWith(accepted[i].name,".zip")){
+        let fileName=accepted[i].name
+        let arr=fileName.split(".zip")
+        this.setState({tag:arr[0]})
+      }
     }
+
     this.setState({ accepted, rejected })
   }
-
+  endWith=(str,pix)=> {
+    var reg = new RegExp(pix + "$");
+    return reg.test(str);
+  }
 
   commit=()=>{
     if(this.props.upload){
@@ -66,7 +75,7 @@ export  default  class DropZone extends React.Component {
     return (
       <section>
         <div className="dropZone">
-          <Dropzone   accept="image/jpeg, image/png" onDrop={this.onDrop} >
+          <Dropzone   accept="image/jpeg, image/png,application/zip" onDrop={this.onDrop} >
             <div className="dropZone-msg">
               <div>拖入文件(多文件请一起拖入)</div>
               <div>支持jpeg,png,zip,html</div>
@@ -86,7 +95,7 @@ export  default  class DropZone extends React.Component {
         </div>
         <div className="dropZone-btn">
           <div>
-            <Input onChange={this.changeTag} addonBefore={"Tag/Type:"} defaultValue={this.state.tag}/>
+            <Input onChange={this.changeTag} addonBefore={"Tag/Type:"} defaultValue={this.state.tag} value={this.state.tag}/>
           </div>
         </div>
          <ImgPreview files={this.state.accepted}  delete={this.deleteById}/>

@@ -3,7 +3,7 @@ import Dropzone from "react-dropzone"
 import {Button, InputNumber, Input, Icon,Row,Col,Card} from "antd"
 import "./FlowImgBox.less"
 import VersionNumber from "../VersionNumber/VersionNumber";
-
+import Lightbox from "react-image-lightbox"
 
 export  default  class FlowImgBox extends React.Component {
   constructor() {
@@ -17,6 +17,16 @@ export  default  class FlowImgBox extends React.Component {
       return arr[arr.length-1]
     }
   }
+  isHtmlPage=(str)=>{
+    if(str!=null && str.indexOf(".html")>-1 || str.indexOf(".htm")>-1){
+      return true
+    }else{
+      return false
+    }
+  }
+  choseLink=(link)=>{
+
+  }
 
   render() {
 
@@ -24,10 +34,12 @@ export  default  class FlowImgBox extends React.Component {
         <Col offset="1">
           <Card style={{ width: 240 }} bodyStyle={{ padding: 0 }}>
           <div className="custom-image">
-            <img alt="example" width="100%" src={link} />
+          {
+            this.isHtmlPage(link)?<Icon type="file" />:<img onClick={()=>this.setState({isOpen:true,currLink:link})} alt="example" width="100%" src={link} />
+          }
           </div>
           <div className="custom-card">
-            <h3><a href={link}>{this.getLastName(link)}</a></h3>
+            <h3><a href={link} target="blank">{this.getLastName(link)}</a></h3>
           </div>
         </Card>
         </Col>
@@ -39,6 +51,13 @@ export  default  class FlowImgBox extends React.Component {
       <Row type="flex" justify="start">
       {arr}
     </Row>
+      {
+        this.state.isOpen &&
+        <Lightbox
+          mainSrc={this.state.currLink}
+          onCloseRequest={() => this.setState({ isOpen: false })}
+        />
+      }
     </div>)
 
   }
