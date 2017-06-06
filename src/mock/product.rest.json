@@ -11,7 +11,8 @@
       "itemName": "WKZF App",
       "itemShortName": "WKAPP",
       "itemDesc": "悟空找房移动端",
-      "itemProps": null
+      "itemProps": null,
+      "imgUrl":"url(cdn/今日笋盘.jpg)"
     },
     {
       "itemId": 8,

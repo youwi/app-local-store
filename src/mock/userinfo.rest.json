@@ -32,8 +32,8 @@
       "rel": "self"
     }
   },
-  "first-name": "Test",
-  "last-name": "TEST [QA]",
+  "first-name": "Test Mock",
+  "last-name": "MockUser [QA]",
   "display-name": "TEST [QA]",
   "email": "yuzhencheng@lifang.com"
 }

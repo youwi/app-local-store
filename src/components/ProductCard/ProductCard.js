@@ -29,8 +29,18 @@ export default function ProCard({ cardList,selectProject}) {
                     {
                     card?<div className="box">
                       <div className="info">
+
                         <Link to={card.link} onClick={ ()=>selectProject(card.projectShortName)}>
-                          <div className="image"  style={{backgroundImage:card.imgUrl}}></div>
+                          <div className="image"  style={{backgroundImage:card.imgUrl}}>
+                            {
+                              !card.imgUrl&&
+                            <div style={{display:"flex",alignItems:"center",height: "inherit"}}>
+                              <div style={{display:"flex",alignItems: "center",flexDirection:"column",width: "100%"}}>
+                                <i className="fa fa-file-image-o fa-5x" aria-hidden="true"/>
+                              </div>
+                            </div>
+                            }
+                          </div>
                           <div className="title">{card.projectName}</div>
                           {/*<div className="intro">{card.projectDesc}</div>*/}
                         </Link>
@@ -61,6 +71,10 @@ const fillArray=(array,count)=>{
     }
   }
 }
+/**
+ * 按内置名单补充图片,如果没有的话.
+ * @param card
+ */
 const patchImgUrl=(card)=>{
   let keyList=[ "今日笋盘","悟空找房", "新悟空通行证","有房有客","孙行者","悟空通行证","新房助手","法务助手"]
 
@@ -69,6 +83,8 @@ const patchImgUrl=(card)=>{
       if(card.projectName.indexOf(key)>-1   ){
         card.imgUrl= "url(cdn/"+key+".jpg)";
         break;
+      }else{
+
       }
     }
     // if(card.projectName.indexOf("wkzf")>-1 || card.projectName.indexOf("悟空找")>-1  ){
