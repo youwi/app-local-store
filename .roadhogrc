@@ -1,5 +1,5 @@
 {
-  "entry": "src/index.js",
+  "entry": "src-client/index.js",
   "disableCSSModules": false,
   "less": false,
   "publicPath": "/",
