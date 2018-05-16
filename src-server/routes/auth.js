@@ -29,6 +29,7 @@ function paramExist(ctx, name) {
 
 router.get(config.index.permission, async function (ctx, next) {
 
+
   let rba = _.clone(data)
   if (paramExist(ctx, "token")) {
     rba.msg = "OK"
@@ -44,7 +45,6 @@ router.get(config.index.permission, async function (ctx, next) {
     rba.state = 0
     ctx.body = rba
   }
-
 })
 
 router.get(config.index.userinfo, async function (ctx, next) {

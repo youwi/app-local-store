@@ -2,9 +2,9 @@ UED Store
 ===========
 
 
-    app 后端代码
-    src 前端代码
-    server.js 服务器
+    src-server 后端代码
+    src-client 前端代码
+    
 
 quick start
 =============
