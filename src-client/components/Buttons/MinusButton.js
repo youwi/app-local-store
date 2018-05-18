@@ -1,5 +1,6 @@
 
-import React, { PropTypes } from 'react';
+import React from 'react';
+
 import {Icon} from "antd"
 import "./buttons.less"
 class MinusBuuton extends React.Component {

@@ -1,4 +1,6 @@
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
+
  import { Table, Input, Icon, Button, Popconfirm } from 'antd';
 export class EditableCell extends React.Component {
   state = {

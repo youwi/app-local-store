@@ -1,6 +1,7 @@
 import { Layout, Menu, Icon } from 'antd';
 const { Header, Sider, Content } = Layout;
-import React, {PropTypes} from 'react'
+import React from 'react';
+
 
 
 export default class SiderDemo extends React.Component {

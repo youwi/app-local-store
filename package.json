@@ -28,8 +28,10 @@
     "url": "https://github.com/justmyfreak/koa-starter/issues"
   },
   "homepage": "https://github.com/justmyfreak/koa-starter",
-
   "engines": {
     "node": ">=0.11.x"
+  },
+  "dependencies": {
+    "recharts": "^1.0.0-beta.10"
   }
 }

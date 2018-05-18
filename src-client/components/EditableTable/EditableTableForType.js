@@ -1,4 +1,6 @@
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
+
 
 import {Table, Popconfirm, Select, Tooltip, Icon, Button,Modal} from "antd"
 import  EditableCell from "./EditableCell"

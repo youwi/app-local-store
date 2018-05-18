@@ -1,4 +1,6 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
+import PropTypes from 'prop-types';
+
 import {
   Icon,
   message,
@@ -7,21 +9,20 @@ import {
   Col,
   Form,
   Input,
-  Select
 } from 'antd'
 import styles from './login.less'
 
 const FormItem = Form.Item
 
 const login = ({
-  loginButtonLoading,
-  onOk,
-  form: {
-    getFieldDecorator,
-    validateFieldsAndScroll
-  },
-  msg
-}) => {
+                 loginButtonLoading,
+                 onOk,
+                 form: {
+                   getFieldDecorator,
+                   validateFieldsAndScroll
+                 },
+                 msg
+               }) => {
 
   function handleOk() {
     validateFieldsAndScroll((errors, values) => {
@@ -35,7 +36,7 @@ const login = ({
   //document.onkeyup = e => e.keyCode===13 &&  handleOk()
 
   return (
-    <div className={styles.form} onKeyUp={ e => e.keyCode===13 &&  handleOk()}>
+    <div className={styles.form} onKeyUp={e => e.keyCode === 13 && handleOk()}>
       <div className={styles.logo}>
         {/*<img src={config.logoSrc}/>*/}
         <span>Pim</span>
@@ -76,9 +77,9 @@ const login = ({
 
 login.propTypes = {
   form: PropTypes.object,
-  loginButtonLoading:PropTypes.bool,
+  loginButtonLoading: PropTypes.bool,
   onOk: PropTypes.func,
-  msg:PropTypes.string
+  msg: PropTypes.string
 }
 
 export default Form.create()(login)

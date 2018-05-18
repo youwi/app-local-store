@@ -1,4 +1,6 @@
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import {Icon,Table,Tag} from 'antd'
 import styles from './comments.less'
 import {classnames,color} from '../../utils'

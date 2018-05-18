@@ -1,8 +1,7 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
 import {connect} from 'dva';
 
-import {Layout} from "antd"
-import  "./ProductPage.less"
+import "./ProductPage.less"
 import ProCard from "../../components/ProductCard/ProductCard";
 
 
@@ -19,6 +18,8 @@ class ProductPage extends React.Component {
     this.props.dispatch({type: "product/getProductVersions", product: name})
   }
   getProjectIdByProjectShortName = (name) => {
+    if (this.props.products == null)
+      return 0
     for (let item of this.props.products) {
       if (item.projectShortName == name)
         return item.id
@@ -35,7 +36,5 @@ class ProductPage extends React.Component {
     )
   }
 }
-
-ProductPage.propTypes = {projectList: PropTypes.array};
 
 export default connect(({product}) => product)(ProductPage);

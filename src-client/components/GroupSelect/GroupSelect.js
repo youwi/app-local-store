@@ -4,7 +4,9 @@
 
 import {connect} from 'dva'
 import  {Tooltip, Select,Collapse,Icon,Menu,Dropdown,Input} from "antd"
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import {isStringLike} from "../../utils/ArrayUtil";
 const Panel = Collapse.Panel;
 const SubMenu = Menu.SubMenu;

@@ -1,11 +1,11 @@
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import {connect} from 'dva'
 import Login from './login/login'
 import HeaderC from '../components/layout/Header'
-import Bread from '../components/layout/bread'
 import Footer from '../components/layout/footer'
-import SiderC from '../components/layout/sider'
-import styles from '../components/layout/layout.less'
+import '../components/layout/layout.less'
 import {Spin, message} from 'antd'
 import {classnames, menu} from '../utils'
 import '../components/layout/common.less'
@@ -13,7 +13,7 @@ import {Layout, Menu, Icon} from 'antd';
 
 const {Header, Content} = Layout;
 
-import {Link} from 'dva/router'
+import {Link} from 'dva/router';
 
 import ProductPage from "./ProductPage/ProductPage";
 
@@ -188,8 +188,8 @@ class RootPage extends React.Component {
     }
 
     if (login) {
-      return <div className={classnames(styles.layout, styles.fold)}>
-        <div className={styles.main}>
+      return <div className={classnames("main", "fold")}>
+        <div className={"main"}>
           <HeaderC {...headerProps}/>
           <Layout style={{height: "calc(100vh - 41px)"}}>
             {/*<Sider collapsible collapsed={this.state.collapsed}  onCollapse={this.toggle}   breakpoint="lg" className="cus-sider" >*/}
@@ -224,7 +224,7 @@ class RootPage extends React.Component {
       </div>
     } else {
       return (
-        <div className={styles.spin}>
+        <div className={"spin"}>
           <Spin tip="加载用户信息..." spinning={loading} size="large">{loading ? <div></div> : <Login {...loginProps}/>}</Spin>
         </div>)
     }

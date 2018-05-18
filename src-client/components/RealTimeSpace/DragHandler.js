@@ -1,41 +1,42 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 
-import { config } from '../../utils'
+import {config} from '../../utils'
 
-export default class DragHandler extends React.Component{
-  constructor(props){
-    super( );
+export default class DragHandler extends React.Component {
+  constructor(props) {
+    super();
 
-    this.state={};
-  }
-  componentDidMount=()=>{
-
-  }
-  componentWillUnmount=()=>{
-
-  }
-  clickInit=(event)=> {
-    this.state.oldX=event.clientX;
-  }
-  clickEnd=()=>{
-    let offset=this.state.oldX-this.state.newX;
-    this.setState({posStyle:{right:-1.5},oldX:0,newX:0})
-    if(!isNaN(offset) && offset!=0)
-      this.props.reachData&&this.props.reachData((offset-5)*-1);
-  }
-  clickMove=(event)=>{
-    if(this.state.oldX==0) return;
-    this.state.newX=event.clientX;
-    let offset=this.state.oldX-this.state.newX;
-    if(!isNaN(offset))
-      this.setState({posStyle:{right:offset||0}})
+    this.state = {};
   }
 
-  render=()=>{
+  componentDidMount = () => {
 
-   return <span className="">
+  }
+  componentWillUnmount = () => {
+
+  }
+  clickInit = (event) => {
+    this.state.oldX = event.clientX;
+  }
+  clickEnd = () => {
+    let offset = this.state.oldX - this.state.newX;
+    this.setState({posStyle: {right: -1.5}, oldX: 0, newX: 0})
+    if (!isNaN(offset) && offset != 0)
+      this.props.reachData && this.props.reachData((offset - 5) * -1);
+  }
+  clickMove = (event) => {
+    if (this.state.oldX == 0) return;
+    this.state.newX = event.clientX;
+    let offset = this.state.oldX - this.state.newX;
+    if (!isNaN(offset))
+      this.setState({posStyle: {right: offset || 0}})
+  }
+
+  render = () => {
+
+    return <span className="">
      {this.props.children}
-       <span style={this.state.posStyle} onMouseMove={this.clickMove} onMouseDown={this.clickInit} onMouseLeave={this.clickEnd} onMouseUp={this.clickEnd}   className="resize-handler-mid">
+      <span style={this.state.posStyle} onMouseMove={this.clickMove} onMouseDown={this.clickInit} onMouseLeave={this.clickEnd} onMouseUp={this.clickEnd} className="resize-handler-mid">
          <span className="resize-handler"/>
        </span>
    </span>

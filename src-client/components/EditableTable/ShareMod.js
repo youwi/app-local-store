@@ -3,7 +3,9 @@
  */
 import {connect} from 'dva'
 import  {Tooltip, Select,Collapse,Icon} from "antd"
-import React, {PropTypes} from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
+
 import {isStringLike} from "../../utils/ArrayUtil";
 import {GroupSelect} from "../GroupSelect/GroupSelect";
 const Panel = Collapse.Panel;

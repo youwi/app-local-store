@@ -1,5 +1,5 @@
 import { Table, Input, Popconfirm } from 'antd';
-import React, {PropTypes} from 'react'
+import React from 'react'
 export default  class EditableCell extends React.Component {
   state = {
     value: this.props.value,
