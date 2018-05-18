@@ -31,7 +31,7 @@ const getMenus = function (menuArray,siderFold,parentPath) {
 function Sider({ siderFold,darkTheme,location,changeTheme }) {
   return (
     <div>
-      <div className={styles.logo}>
+      <div className={"logo"}>
         <img src={config.logoSrc} />
         {siderFold?'':<span>{config.logoText}</span>}
       </div>

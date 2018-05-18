@@ -17,7 +17,7 @@ import {Link} from 'dva/router';
 
 import ProductPage from "./ProductPage/ProductPage";
 
-class RootPage extends React.Component {
+class RootLayout extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -54,8 +54,12 @@ class RootPage extends React.Component {
   /* 修正路径和URL导航 */
   routeHiFix = (props) => {
     //defaultSelectedKeys
-    if (props.location.pathname) {
+    if (props.location && props.location.pathname) {
       let arr = props.location.pathname.split("/")
+      if (arr != null)
+        this.setState({defaultSelectedKeys: [arr[1]]})
+    } else {
+      let arr = location.pathname.split("/")
       if (arr != null)
         this.setState({defaultSelectedKeys: [arr[1]]})
     }
@@ -98,7 +102,7 @@ class RootPage extends React.Component {
   }
 
   isRootPath = () => {
-    return window.location.href.indexOf("#/?") > 0
+    return window.location.hash === "#/?" || window.location.hash === "#/"
   }
 
   render = () => {
@@ -188,16 +192,16 @@ class RootPage extends React.Component {
     }
 
     if (login) {
-      return <div className={classnames("main", "fold")}>
+      return <div className={classnames("layout", "fold")}>
         <div className={"main"}>
           <HeaderC {...headerProps}/>
-          <Layout style={{height: "calc(100vh - 41px)"}}>
+          <Layout >
             {/*<Sider collapsible collapsed={this.state.collapsed}  onCollapse={this.toggle}   breakpoint="lg" className="cus-sider" >*/}
             {/*<div className="logo"/>*/}
             {/*{typeMenu}*/}
             {/*{pintMenu}*/}
             {/*</Sider>*/}
-            <Layout>
+            <Layout style={{minHeight:"calc(100vh - 85px)"}}>
               <Header style={{background: '#fff', padding: 0}}>
                 <Icon
                   className="trigger"
@@ -232,7 +236,7 @@ class RootPage extends React.Component {
   }
 }
 
-RootPage.propTypes = {
+RootLayout.propTypes = {
 
   location: PropTypes.object,
   dispatch: PropTypes.func,
@@ -243,5 +247,6 @@ RootPage.propTypes = {
   siderFold: PropTypes.bool,
   darkTheme: PropTypes.bool,
 }
+//
 //  {showBread ? <Bread location={location} menu={menu}/> : <div style={{height:"16px"}}/>}
-export default connect(({app, typePage, itemPage, permission, upload}) => ({app, ...typePage, ...itemPage, ...upload, permissionList: permission.permissionList}))(RootPage)
+export default connect(({app, typePage, itemPage, permission, upload}) => ({app, ...typePage, ...itemPage, ...upload, permissionList: permission.permissionList}))(RootLayout)

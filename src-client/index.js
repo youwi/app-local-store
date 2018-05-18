@@ -2,7 +2,7 @@ import './index.less';
 import 'antd/dist/antd.css';
 import {ip, httpip} from "./env.json"
 
-import RouteConfig from "./router"
+import RouteConfig from "./pages/RouterConfig"
 import config from "../config"
 import "babel-polyfill";
 import {message} from 'antd'

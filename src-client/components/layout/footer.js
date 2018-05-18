@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react'
-import styles from './layout.less'
+import  './layout.less'
 import { config } from '../../utils'
 import { Link } from 'dva/router'
 import request from "../../utils/request";
@@ -55,7 +55,7 @@ export default class Footer extends React.Component{
     if(document.body.clientHeight<500)
       return null
     else
-      return <div className={styles.footer} style={ style} ref="foot">
+      return <div className={"footer"} style={ style} ref="foot">
         <Link to={"/about"}>{config.footerText}</Link>
         {
           this.state.gaCore?<span className="ga-footer">转发量(月天时分):

@@ -16,6 +16,7 @@ import Cpu from '../../components/dashboard/cpu'
 import User from '../../components/dashboard/user'
 import styles from './dashboard.less'
 import {color} from '../../utils'
+import RootLayout from "../RootLayout";
 
 const bodyStyle = {
   bodyStyle:{
@@ -31,6 +32,7 @@ function Dashboard({dashboard}) {
   </Col>)
 
   return (
+    <RootLayout>
     <Row gutter={24}>
       {numberCards}
       <Col lg={18} md={24}>
@@ -89,6 +91,7 @@ function Dashboard({dashboard}) {
         </Card>
       </Col>
     </Row>
+    </RootLayout>
   )
 }
 
