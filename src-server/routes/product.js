@@ -216,6 +216,9 @@ router.get(config.index.allVersionImage, async function (ctx, next) {
       if (!pathName.endsWith(".html") && !pathName.endsWith(".DS_Store"))
         links.push(pathName.replace(config.uploadPath, ""))
     })
+    if(fs.existsSync(path.join(config.uploadPath, product, version, tag,"index.html"))){
+      rba.indexExist=true
+    }
 
     rba.state = 1
     rba.links = links

@@ -29,11 +29,12 @@ class VersionsPage extends React.Component {
   constructor(props) {
     super();
   }
-  getProductShortName=()=>{
-    let productShortName=""
+
+  getProductShortName = () => {
+    let productShortName = ""
     if (this.props.params) {
       productShortName = this.props.params.productShortName
-    }else if(this.props.match.params){
+    } else if (this.props.match.params) {
       productShortName = this.props.match.params.productShortName
     }
     return productShortName
@@ -43,6 +44,13 @@ class VersionsPage extends React.Component {
     let dom = ReactDom.findDOMNode(this.refs.Content)
     if (dom != null) this.setState({contentHeight: dom.clientHeight})
     this.props.dispatch({type: "product/getProductVersions", product: this.getProductShortName()})
+    if (this.props) {
+    }
+  }
+  componentWillReceiveProps = (nextProp, currProp) => {
+    if (nextProp.indexExist != true) {
+      this.setState({showMode: MODE.imagesPage})
+    }
   }
 
   onSelect = (name) => {
@@ -64,7 +72,10 @@ class VersionsPage extends React.Component {
     e.stopPropagation && e.stopPropagation()
     let product = this.getProductShortName()
     this.props.dispatch({type: "product/scanAllImages", product, version, tag})
-    this.setState({showMode: MODE.imagesPage})
+    if (this.state.showMode == MODE.imagesPage)
+      this.setState({showMode: MODE.indexPage})
+    if (this.state.showMode == MODE.indexPage)
+      this.setState({showMode: MODE.imagesPage})
   }
   dispatchVersionTagPreview = (item) => {
     let product = this.getProductShortName()
@@ -75,12 +86,20 @@ class VersionsPage extends React.Component {
 
     this.props.dispatch({type: "product/scanAllImages", product, version, tag})
   }
+  toggleShowMode = () => {
+    this.setState({showMode: MODE.uploadPage})
+  }
+
   buildMenu = (versions, versionT) => {
     if (versionT != null) {
       let out = []
-      for (let version in versionT) {
+      let keys = Object.keys(versionT);
+      for (let version of keys.sort().reverse()) {
         let sub = versionT[version]
-        out.push(<SubMenu key={version} title={<span><Icon type="folder"/><span>{version}</span></span>}>
+        out.push(<SubMenu key={version} title={<span style={{
+          width: "100%",
+          display: "inline-block"
+        }} onClick={this.toggleShowMode}><Icon type="folder"/><span>{version}</span></span>}>
           {sub.map(name => <Menu.Item key={name}><span style={{width: "180px"}}>{name}</span>
             <Tooltip placement="top" title={"显示所有图片"}>
               <Icon className="menu-btn" style={{marginRight: "0px"}} type="link" onClick={(e) => this.showAllImages(e, version, name)}/>
@@ -88,17 +107,15 @@ class VersionsPage extends React.Component {
           </Menu.Item>)}
         </SubMenu>)
       }
-      return <Menu theme="dark" mode="inline" onClick={this.dispatchVersionTagPreview}>{out}</Menu>
-
+      return <Menu theme="dark" mode="inline" defaultOpenKeys={[keys[0]]} onClick={this.dispatchVersionTagPreview}>{out}</Menu>
     }
-
   }
   upload = (obj) => {
     let nobj = {...obj}
     delete nobj.accepted
     let product = this.getProductShortName()
 
-    this.props.dispatch({type: "upload/upload", ...nobj, files:obj.accepted, product})
+    this.props.dispatch({type: "upload/upload", ...nobj, files: obj.accepted, product})
 
     //刷新列表,
     this.props.dispatch({type: "product/getProductVersions", product})
@@ -109,7 +126,7 @@ class VersionsPage extends React.Component {
       borderWidth: '0px',
       minHeight: this.state.contentHeight || "500px",
       width: '100%',
-      height:"calc(100vh - 41px)"
+      height: "calc(100vh - 41px)"
     }
     let contnetStyle = {background: "#FFF", padding: this.state.indexPage == null ? "12px" : "0px"}
     let showDom = "";

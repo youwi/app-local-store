@@ -54,7 +54,7 @@ router.post(config.index.uploadzip, async function (ctx, next) {
     let tagDir = path.join(config.uploadPath, product, version, tag)
     let versionDir = path.join(config.uploadPath, product, version)
     if (!fs.existsSync(tagDir)) {
-      mkdirsSync(tagDir)
+      mkdirsSync(tagDir + "/")
     }
 
     let nameList = []
@@ -110,6 +110,7 @@ var mkdirs = function (dirpath, mode, callback) {
 function mkdirsSync(dirpath, mode) {
   if (!fs.existsSync(dirpath)) {
     var pathtmp;
+    if (dirpath.indexOf("/") == 0) pathtmp = "/";
     dirpath.split(path.sep).forEach(function (dirname) {
       if (dirname === "") return
       if (pathtmp) {

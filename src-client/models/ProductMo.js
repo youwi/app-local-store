@@ -1,60 +1,61 @@
-import { asyncGetAllProduct,asyncGetProductVersion,asyncGetAllImages} from "../asyncmo/ServiceProduct"
+import {asyncGetAllProduct, asyncGetProductVersion, asyncGetAllImages} from "../asyncmo/ServiceProduct"
 import {STATE} from "../../config"
 
-import {ip,httpip} from "../env.json"
+import {ip, httpip} from "../env.json"
 import config from "../../config"
+
 export default {
 
   namespace: 'product',
 
   state: {
-    links:[]
+    links: []
   },
 
   subscriptions: {
     setup({dispatch, history}) {
-      dispatch({type:"getAllProducts"})
+      dispatch({type: "getAllProducts"})
     }
   },
 
   effects: {
-    *fetch({ payload }, { call, put }) {  // eslint-disable-line
-      yield put({ type: 'save' });
+    * fetch({payload}, {call, put}) {  // eslint-disable-line
+      yield put({type: 'save'});
     },
-    *getAllProducts(arg, { call, put }){
-      let data=yield asyncGetAllProduct()
-      if(data.state=STATE.SUCCESS){
-        data.list.forEach((item)=>{
-          item.projectShortName=item.itemShortName
-          item.projectName=item.itemDesc
-          item.link="/product/"+item.itemShortName
+    * getAllProducts(arg, {call, put}) {
+      let data = yield asyncGetAllProduct()
+      if (data.state = STATE.SUCCESS) {
+        data.list.forEach((item) => {
+          item.projectShortName = item.itemShortName
+          item.projectName = item.itemDesc
+          item.link = "/product/" + item.itemShortName
         })
-        yield put({type:"pureUpdate",products:data.list})
+        yield put({type: "pureUpdate", products: data.list})
       }
     },
-    *getProductVersions(arg, { call, put }){
-      let data=yield asyncGetProductVersion(arg)
-      if(data.state=STATE.SUCCESS){
-        yield put({type:"pureUpdate",versions:data.versions,versionT:data.versionT})
+    * getProductVersions(arg, {call, put}) {
+      let data = yield asyncGetProductVersion(arg)
+      if (data.state = STATE.SUCCESS) {
+        yield put({type: "pureUpdate", versions: data.versions.sort().reverse(), versionT: data.versionT})
       }
     },
-    *scanAllImages(arg,{call,put}){
-      let data=yield asyncGetAllImages(arg)
-      if(data.state=STATE.SUCCESS){
+    * scanAllImages(arg, {call, put}) {
+      let data = yield asyncGetAllImages(arg)
+      if (data.state = STATE.SUCCESS) {
         // let allImagesLink=data.links.map(link=>{
         //   if(!link.endWith(".html"))
         //     return  httpip+link
         //   else return null
         // }).filter((a)=>a!=null)
-        data.links.sort((link)=>link.endWith(".html"))
-        let allImagesLink=data.links.map(link=>httpip+link)
-        yield put({type:"pureUpdate",allImages:allImagesLink})
+        data.links.sort((link) => link.endWith(".html"))
+        let allImagesLink = data.links.map(link => httpip + link)
+        yield put({type: "pureUpdate", allImages: allImagesLink, indexExist: data.indexExist})
       }
     }
   },
 
   reducers: {
-    pureUpdate(state, action){
+    pureUpdate(state, action) {
       return {...state, ...action};
     }
   }
@@ -62,12 +63,12 @@ export default {
 };
 
 
-String.prototype.startWith=function(str){
-  var reg=new RegExp("^"+str);
+String.prototype.startWith = function (str) {
+  var reg = new RegExp("^" + str);
   return reg.test(this);
 }
 //测试ok，直接使用str.endWith("abc")方式调用即可
-String.prototype.endWith=function(str){
-  var reg=new RegExp(str+"$");
+String.prototype.endWith = function (str) {
+  var reg = new RegExp(str + "$");
   return reg.test(this);
 }
