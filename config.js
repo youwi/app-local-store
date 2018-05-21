@@ -16,11 +16,11 @@ module.exports = {
     sessionOnline:"http://crowd.wkzf:8095/crowd/rest/usermanagement/1/session"
   },
 
-  name: 'UED',
+  name: 'UED & App',
   prefix: 'uid',
-  footerText: ' UED-Team © wkzf',
-  logoSrc: "UED store",
-  logoText: 'UED Store System',
+  footerText: ' Test-Team © lieluobo',
+  logoSrc: "UA Store",
+  logoText: 'UA Store',
   needLogin: true,
   uploadPath:"/opt/upload",
   index: {

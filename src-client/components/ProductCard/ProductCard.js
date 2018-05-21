@@ -17,13 +17,18 @@ export default function ProCard({cardList, selectProject}) {
     widthLevel = 5
     widthStyle.width = "18%"
   }
+  if (cardList.length < COL_COUNT) {
+
+  }
 
   return (
     <div className={"project"}>
       <div style={{background: 'rgba(236, 236, 236, 0)', padding: '0px'}}>
         {
           rowlist && rowlist.map((row, i) => {
-              fillArray(row, COL_COUNT)//row.length=COL_COUNT;
+              if (cardList.length > COL_COUNT) {
+                fillArray(row, COL_COUNT)//row.length=COL_COUNT;
+              }
               return <Row type="flex" justify="center" align="middle" key={i}>
                 {
                   row && row.map && row.map((card, j) => {

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "server": "node main.js"
-   },
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/justmyfreak/koa-starter.git"
@@ -22,8 +22,11 @@
   },
   "homepage": "https://github.com/justmyfreak/koa-starter",
   "dependencies": {
+    "adbkit-apkreader": "^3.0.1",
     "adm-zip": "^0.4.11",
+    "apkreader": "^1.0.7",
     "es6-promise": "^4.2.4",
+    "isomorphic-apk-reader": "^1.2.0",
     "isomorphic-fetch": "^2.2.1",
     "js-base64": "^2.4.5",
     "koa": "^2.5.1",
@@ -37,8 +40,8 @@
     "koa-views": "^6.1.4",
     "koa2-cors": "^2.0.5",
     "lodash": "^4.17.10",
-    "unzip": "^0.1.11",
-    "superagent": "latest"
+    "superagent": "latest",
+    "unzip": "^0.1.11"
   },
   "optionalDependencies": {},
   "devDependencies": {},

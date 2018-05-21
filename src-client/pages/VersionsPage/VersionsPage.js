@@ -29,19 +29,20 @@ class VersionsPage extends React.Component {
   constructor(props) {
     super();
   }
+  getProductShortName=()=>{
+    let productShortName=""
+    if (this.props.params) {
+      productShortName = this.props.params.productShortName
+    }else if(this.props.match.params){
+      productShortName = this.props.match.params.productShortName
+    }
+    return productShortName
+  }
 
   componentDidMount = () => {
     let dom = ReactDom.findDOMNode(this.refs.Content)
     if (dom != null) this.setState({contentHeight: dom.clientHeight})
-    let productShortName = ""
-    if (this.props.params) {
-      productShortName = this.props.params.productShortName
-    }
-
-    if (this.props.match.params) {
-      productShortName = this.props.match.params.productShortName
-    }
-    this.props.dispatch({type: "product/getProductVersions", product: productShortName})
+    this.props.dispatch({type: "product/getProductVersions", product: this.getProductShortName()})
   }
 
   onSelect = (name) => {
@@ -61,12 +62,12 @@ class VersionsPage extends React.Component {
   }
   showAllImages = (e, version, tag) => {
     e.stopPropagation && e.stopPropagation()
-    let product = this.props.params.productShortName
+    let product = this.getProductShortName()
     this.props.dispatch({type: "product/scanAllImages", product, version, tag})
     this.setState({showMode: MODE.imagesPage})
   }
   dispatchVersionTagPreview = (item) => {
-    let product = this.props.params.productShortName
+    let product = this.getProductShortName()
     let version = item.keyPath[1]
     let tag = item.key
     let indexPage = httpip + "/" + product + "/" + version + "/" + tag + "/" + "index.html"
@@ -95,8 +96,9 @@ class VersionsPage extends React.Component {
   upload = (obj) => {
     let nobj = {...obj}
     delete nobj.accepted
-    let product = this.props.params.productShortName
-    this.props.dispatch({type: "upload/upload", ...nobj, ...obj.accepted, product})
+    let product = this.getProductShortName()
+
+    this.props.dispatch({type: "upload/upload", ...nobj, files:obj.accepted, product})
 
     //刷新列表,
     this.props.dispatch({type: "product/getProductVersions", product})
@@ -106,7 +108,8 @@ class VersionsPage extends React.Component {
     let iStyle = {
       borderWidth: '0px',
       minHeight: this.state.contentHeight || "500px",
-      width: '100%'
+      width: '100%',
+      height:"calc(100vh - 41px)"
     }
     let contnetStyle = {background: "#FFF", padding: this.state.indexPage == null ? "12px" : "0px"}
     let showDom = "";
