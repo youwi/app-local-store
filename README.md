@@ -5,7 +5,10 @@ UED Store
     src-server 后端代码
     src-client 前端代码
     
-
+## preview 
+![](./preview1.png)
+![](./preview2.png)
+![](./preview3.png)
 quick start
 =============
 
