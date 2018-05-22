@@ -6,9 +6,9 @@
   "scripts": {
     "start": "parcel index.html",
     "build": "parcel build index.html",
-    "env-dev": "babel-node buildtool.js --initenv  --server 127.0.0.1 --port 8080",
-    "env-test": "babel-node buildtool.js --initenv --server 10.0.18.237  --port 8102 ",
-    "env-prd": "babel-node buildtool.js --initenv  --server mock.wkzf  --port 8101"
+    "env-dev": "node buildtool.js --initenv  --server / --port /",
+    "env-test": "node buildtool.js --initenv --server  /   --port ''",
+    "env-prd": "node buildtool.js --initenv  --server mock.wkzf  --port 8101"
   },
   "repository": {
     "type": "git",
@@ -36,6 +36,7 @@
     "js-base64": "^2.4.5",
     "js-cookie": "^2.2.0",
     "markdown-it": "^8.4.1",
+    "minifyjs": "^0.2.0",
     "mockjs": "^1.0.1-beta3",
     "moment": "^2.22.1",
     "prop-types": "^15.6.1",

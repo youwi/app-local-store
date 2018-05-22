@@ -18,6 +18,7 @@ export default function request(url, options,) {
   } else {
     url = Env.httpip + url
   }
+  if(url.indexOf("//")===0) url=url.replace("//","/");
   if (options.data && !isInBody) {
     if (options.data.constructor == String)
       options.data = {name: options.data, token: window.localStorage.token}

@@ -17,9 +17,7 @@ export default function ProCard({cardList, selectProject}) {
     widthLevel = 5
     widthStyle.width = "18%"
   }
-  if (cardList.length < COL_COUNT) {
 
-  }
 
   return (
     <div className={"project"}>

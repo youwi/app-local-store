@@ -6,7 +6,7 @@
   "scripts": {
     "server": "node  src-server/main",
     "env-dev": "node postbuild.js --initenv  --server 127.0.0.1 --port 8080",
-    "env-test": "node postbuild.js --initenv --server 10.0.18.237  --port 8102 ",
+    "env-test": "node postbuild.js --initenv --server 172.16.52.181   --port 8080 ",
     "env-prd": "node postbuild.js --initenv  --server mock.wkzf  --port 8101"
   },
   "repository": {
