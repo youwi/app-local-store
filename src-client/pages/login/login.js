@@ -1,16 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 
-import {
-  Icon,
-  message,
-  Button,
-  Row,
-  Col,
-  Form,
-  Input,
-} from 'antd'
+
+import Input from "antd/lib/input"
+import Button from 'antd/lib/button';
+import Row from 'antd/lib/row';
 import styles from './login.less'
+import 'antd/lib/form/style';
+import Form from "antd/lib/form"
 
 const FormItem = Form.Item
 

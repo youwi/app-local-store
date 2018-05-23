@@ -4,7 +4,16 @@ import PropTypes from 'prop-types';
 import ReactDom from "react-dom"
 import {connect} from 'dva';
 
-import {Layout, Menu, Icon, Button, Tooltip} from "antd"
+import Tooltip from 'antd/lib/tooltip';
+import Icon from 'antd/lib/icon';
+import Menu from 'antd/lib/menu';
+import Layout from 'antd/lib/layout';
+
+import 'antd/lib/tooltip/style';
+import 'antd/lib/icon/style';
+import 'antd/lib/menu/style';
+import 'antd/lib/layout/style';
+
 import "./VersionPage.less"
 
 import DropZone from "../../components/DropZone/DropZone";

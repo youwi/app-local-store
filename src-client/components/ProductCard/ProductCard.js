@@ -1,7 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types';
 
-import {Menu, Icon, Button, Row, Col, Card} from 'antd'
+
+import Row from 'antd/lib/row';
+import Col from 'antd/lib/col';
+
 import {Link} from 'dva/router'
 import './ProCard.less'
 

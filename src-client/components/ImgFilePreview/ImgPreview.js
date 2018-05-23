@@ -1,28 +1,24 @@
-
 import React from 'react'
-import Dropzone from "react-dropzone"
-import {Button,InputNumber,Input,Icon} from "antd"
+
+import Button from 'antd/lib/button';
+
 import "./ImgPreview.less"
-import VersionNumber from "../VersionNumber/VersionNumber";
 import ImgFile from "./ImgFile";
 
-export  default  class ImgPreview extends React.Component {
+export default class ImgPreview extends React.Component {
   constructor() {
     super()
-    this.state = {
-
-    }
+    this.state = {}
   }
-
 
 
   render() {
 
-    let arr=this.props.files.map((file,i)=>
+    let arr = this.props.files.map((file, i) =>
       <span className="preview-span" key={file.name}>
-        <span style={{display:"flex"}}>
+        <span style={{display: "flex"}}>
           <span><ImgFile file={file}/></span>
-           <Button className="preview-close-btn" shape="circle" onClick={()=>this.props.delete(i)} icon="close" size={"small"}/>
+           <Button className="preview-close-btn" shape="circle" onClick={() => this.props.delete(i)} icon="close" size={"small"}/>
         </span>
         <div>
            <span>{file.name}</span>

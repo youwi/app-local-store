@@ -6,10 +6,16 @@ import Login from './login/login'
 import HeaderC from '../components/layout/Header'
 import Footer from '../components/layout/footer'
 import '../components/layout/layout.less'
-import {Spin, message} from 'antd'
 import {classnames, menu} from '../utils'
+import 'antd/lib/spin/style';
+
 import '../components/layout/common.less'
-import {Layout, Menu, Icon} from 'antd';
+
+import Spin from "antd/lib/spin"
+import Icon from 'antd/lib/icon';
+import Menu from 'antd/lib/menu';
+import Layout from 'antd/lib/layout';
+
 
 const {Header, Content} = Layout;
 
@@ -195,13 +201,13 @@ class RootLayout extends React.Component {
       return <div className={classnames("layout", "fold")}>
         <div className={"main"}>
           <HeaderC {...headerProps}/>
-          <Layout >
+          <Layout>
             {/*<Sider collapsible collapsed={this.state.collapsed}  onCollapse={this.toggle}   breakpoint="lg" className="cus-sider" >*/}
             {/*<div className="logo"/>*/}
             {/*{typeMenu}*/}
             {/*{pintMenu}*/}
             {/*</Sider>*/}
-            <Layout style={{minHeight:"calc(100vh - 85px)"}}>
+            <Layout style={{minHeight: "calc(100vh - 85px)"}}>
               <Header style={{background: '#fff', padding: 0}}>
                 <Icon
                   className="trigger"

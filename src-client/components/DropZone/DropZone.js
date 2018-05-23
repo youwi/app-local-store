@@ -1,6 +1,16 @@
 import React from 'react'
 import Dropzone from "react-dropzone"
-import {Button, InputNumber, Input, Icon, message} from "antd"
+
+import message from "antd/lib/message"
+import Input from "antd/lib/input"
+import Button from 'antd/lib/button';
+
+
+import 'antd/lib/message/style';
+import 'antd/lib/input/style';
+import 'antd/lib/button/style';
+
+
 import "./DropZone.less"
 import VersionNumber from "../VersionNumber/VersionNumber";
 import ImgPreview from "../ImgFilePreview/ImgPreview";

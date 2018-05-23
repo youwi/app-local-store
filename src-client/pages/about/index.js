@@ -10,9 +10,9 @@
 
 import React from 'react';
 import request from "../../utils/request";
-const MarkdownIt = require('markdown-it');
-const hljs = require('highlight.js');
-const mdsource=require('./index.md')
+// const MarkdownIt = require('markdown-it');
+// const hljs = require('highlight.js');
+// const mdsource=require('./index.md')
 const Base64 = require('js-base64').Base64;
 
 import "./about.less"
@@ -41,7 +41,8 @@ class AboutPage extends React.Component {
   }
 
   render() {
-    const md = new MarkdownIt({
+
+    /*const md = new MarkdownIt({
       html: true,
       linkify: true,
       highlight: (str, lang) => {
@@ -55,13 +56,13 @@ class AboutPage extends React.Component {
         } catch (err) { console.error(err.stack); } // eslint-disable-line no-console
         return '';
       },
-    });
-    let html=""
+    });*/
+    let html="<span>测试团队</span>"
 
-    if(mdsource!=null && mdsource.split!=null){
+   /* if(mdsource!=null && mdsource.split!=null){
       if(mdsource.split("base64,").length>0)
         html=md.render( Base64.decode(mdsource.split("base64,")[1]));
-    }
+    }*/
 
     return (
           <div style={{paddingLeft:'100px'}} className="about">

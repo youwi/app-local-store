@@ -1,8 +1,17 @@
 import React from 'react'
-import Dropzone from "react-dropzone"
-import {Button, InputNumber, Input, Icon, Row, Col, Card} from "antd"
+
+
+import Card from 'antd/lib/card';
+import Icon from 'antd/lib/icon';
+import Row from 'antd/lib/row';
+import Col from 'antd/lib/col';
+
+import 'antd/lib/card/style';
+import 'antd/lib/icon/style';
+import 'antd/lib/row/style';
+import 'antd/lib/col/style';
+
 import "./FlowImgBox.less"
-import VersionNumber from "../VersionNumber/VersionNumber";
 import Lightbox from "react-image-lightbox"
 import "react-image-lightbox/style.css"
 

@@ -1,7 +1,6 @@
 
 import React from 'react'
-import Dropzone from "react-dropzone"
-import {Button,InputNumber,Input} from "antd"
+import Input from "antd/lib/input"
 import "./VersionNumber.less"
 
 export  default  class VersionNumber extends React.Component {

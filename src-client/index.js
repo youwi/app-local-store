@@ -1,11 +1,9 @@
 import './index.less';
-import 'antd/dist/antd.css';
 import {ip, httpip} from "./env.json"
-
 import RouteConfig from "./pages/RouterConfig"
 import config from "../config"
 import "babel-polyfill";
-import {message} from 'antd'
+import message from "antd/lib/message"
 
 import "react-image-gallery/styles/css/image-gallery.css"
 

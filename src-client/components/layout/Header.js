@@ -1,5 +1,8 @@
 import React from 'react'
-import {Menu, Icon, Button} from 'antd'
+
+
+import Icon from 'antd/lib/icon';
+import Menu from 'antd/lib/menu';
 import {Link} from 'dva/router'
 import config from "../../../config"
 
