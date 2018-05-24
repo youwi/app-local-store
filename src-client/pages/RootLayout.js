@@ -3,18 +3,15 @@ import PropTypes from 'prop-types';
 
 import {connect} from 'dva'
 import Login from './login/login'
-import HeaderC from '../components/layout/Header'
-import Footer from '../components/layout/footer'
-import '../components/layout/layout.less'
+import RootHeader from './layout/RootHeader'
+import RootFooter from './layout/RootFooter'
 import {classnames, menu} from '../utils'
 import 'antd/lib/spin/style';
-
-import '../components/layout/common.less'
-
 import Spin from "antd/lib/spin"
 import Icon from 'antd/lib/icon';
 import Layout from 'antd/lib/layout';
-
+import "../components/font-awesome-4.7.0/less/font-awesome.less";
+import "./RootLayout.less"
 
 const {Header, Content} = Layout;
 
@@ -96,7 +93,7 @@ class RootLayout extends React.Component {
     if (login) {
       return <div className={classnames("layout", "fold")}>
         <div className={"main"}>
-          <HeaderC {...headerProps}/>
+          <RootHeader {...headerProps}/>
           <Layout>
             {/*<Sider collapsible collapsed={this.state.collapsed}  onCollapse={this.toggle}   breakpoint="lg" className="cus-sider" >*/}
             {/*<div className="logo"/>*/}
@@ -125,7 +122,7 @@ class RootLayout extends React.Component {
               </Content>
             </Layout>
           </Layout>
-          {this.isRootPath() ? <Footer/> : null}
+          {this.isRootPath() ? <RootFooter/> : null}
 
         </div>
       </div>

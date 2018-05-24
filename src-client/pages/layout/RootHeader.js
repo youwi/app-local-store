@@ -9,7 +9,7 @@ import config from "../../../config"
 const SubMenu = Menu.SubMenu
 
 
-export default class Footer extends React.Component {
+export default class RootHeader extends React.Component {
 
   render = () => {
     let {user, logout} = this.props
