@@ -149,4 +149,4 @@ RootLayout.propTypes = {
 }
 //
 //  {showBread ? <Bread location={location} menu={menu}/> : <div style={{height:"16px"}}/>}
-export default connect(({app, typePage, itemPage, permission, upload}) => ({app, ...typePage, ...itemPage, ...upload, permissionList: permission.permissionList}))(RootLayout)
+export default connect(({app, typePage, itemPage, permission, upload}) => ({app, ...typePage, ...itemPage, ...upload}))(RootLayout)

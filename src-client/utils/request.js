@@ -2,6 +2,28 @@ const Ajax = require("robe-ajax")
 
 const Env = require("../env.json")
 
+import MOCK_DATA from "./mock"
+
+/**
+ * Mock by json
+ * @param url
+ * @return {*}
+ */
+function findMatchMock(url) {
+  if (MOCK_DATA[url]) {
+    console.log("mocked:" + url);
+    return MOCK_DATA[url]
+  }
+
+  for (let path in MOCK_DATA) {
+    if (url.indexOf(path) > -1) {
+      console.log("mocked:" + url);
+      return MOCK_DATA[path]
+    }
+  }
+  return null
+}
+
 /**
  * Requests a URL, returning a promise.
  *
@@ -11,14 +33,18 @@ const Env = require("../env.json")
  */
 export default function request(url, options,) {
   let isInBody = options.isInBody
-  let isPostFile = options.isPostFile
+  let isPostFile = options.isPostFile;
+
+  if (findMatchMock(url)) {
+    return findMatchMock(url)
+  }
 
   if (isFixed(url)) {
     url = url.replace(/(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9])\.(25[0-5]|2[0-4][0-9]|1[0-9][0-9]|[1-9]?[0-9]):\d+/, Env.ip)
   } else {
     url = Env.httpip + url
   }
-  if(url.indexOf("//")===0) url=url.replace("//","/");
+  if (url.indexOf("//") === 0) url = url.replace("//", "/");
   if (options.data && !isInBody) {
     if (options.data.constructor == String)
       options.data = {name: options.data, token: window.localStorage.token}

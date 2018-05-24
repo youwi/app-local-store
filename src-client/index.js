@@ -4,20 +4,10 @@ import RouteConfig from "./pages/RouterConfig"
 import config from "../config"
 import "babel-polyfill";
 import message from "antd/lib/message"
-
 import "react-image-gallery/styles/css/image-gallery.css"
-
-require("./mock")
 import dva from 'dva';
-
 import models from "./models/UserMo";
-
-import models0 from "./models/PermissionMo";
-
-import models01 from "./models/DashboardMo";
-
 import models012 from "./models/UploadMo";
-
 import models0123 from "./models/ProductMo";
 
 const app = dva({
@@ -34,8 +24,6 @@ const app = dva({
 app.router(RouteConfig);
 
 app.model(models)
-app.model(models0)
-app.model(models01)
 app.model(models012)
 app.model(models0123)
 // app.model(require('./models/PimTypePageMo'))
