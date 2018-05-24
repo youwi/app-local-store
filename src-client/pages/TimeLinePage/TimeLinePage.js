@@ -2,8 +2,10 @@ import React from 'react';
 import {connect} from 'dva';
 
 import "./TimeLine.less"
-import ProCard from "../../components/ProductCard/ProductCard";
-
+import Timeline from "antd/es/timeline/Timeline";
+import "antd/lib/timeline/style";
+import RootLayout from "../RootLayout";
+import Layout from "antd/lib/layout";
 
 class TimeLinePage extends React.Component {
   state = {}
@@ -31,10 +33,39 @@ class TimeLinePage extends React.Component {
   render = () => {
     return (
       <div>
-        <ProCard cardList={this.props.products} selectProject={this.onSelect}/>
+      <Layout >
+        <Layout.Sider className={'hidden-sider'}>Sider</Layout.Sider>
+        <Layout>
+          <Layout.Header>Header</Layout.Header>
+          <Layout.Content>
+            <Layout>
+              <Layout.Header>Header</Layout.Header>
+              <Layout.Content>
+                <Timeline>
+                  <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
+                  <Timeline.Item>Solve initial network problems 2015-09-01</Timeline.Item>
+                  <Timeline.Item>Technical testing 2015-09-01</Timeline.Item>
+                  <Timeline.Item>Network problems being solved 2015-09-01</Timeline.Item>
+                </Timeline>
+                <Timeline>
+                  <Timeline.Item>Create a services site 2015-09-01</Timeline.Item>
+                  <Timeline.Item>Solve initial network problems 2015-09-01</Timeline.Item>
+                  <Timeline.Item>Technical testing 2015-09-01</Timeline.Item>
+                  <Timeline.Item>Network problems being solved 2015-09-01</Timeline.Item>
+                </Timeline>
+              </Layout.Content>
+            </Layout>
+
+
+          </Layout.Content>
+        </Layout>
+        <Layout.Sider className={'hidden-sider'}>Sider</Layout.Sider>
+      </Layout>
       </div>
+
     )
   }
 }
 
 export default connect(({product}) => product)(TimeLinePage);
+//       <RootLayout>

@@ -13,13 +13,10 @@ import '../components/layout/common.less'
 
 import Spin from "antd/lib/spin"
 import Icon from 'antd/lib/icon';
-import Menu from 'antd/lib/menu';
 import Layout from 'antd/lib/layout';
 
 
 const {Header, Content} = Layout;
-
-import {Link} from 'dva/router';
 
 import ProductPage from "./ProductPage/ProductPage";
 
@@ -45,18 +42,6 @@ class RootLayout extends React.Component {
     this.routeHiFix(next)
   }
 
-  handleClickMenu = (e) => {
-    this.props.dispatch({type: "itemPage/getAllItems"})
-    this.props.dispatch({type: "typePage/getAllTypes"})
-    this.routeHiFix(this.props)
-    this.setState({defaultSelectedKeysDy: [""], newMenuDyKeyIdDy: Math.random()})
-  }
-  handleClickMenuDy = () => {
-    this.props.dispatch({type: "itemPage/getAllItems"})
-    this.props.dispatch({type: "typePage/getAllTypes"})
-    this.routeHiFix(this.props)
-    this.setState({defaultSelectedKeys: [""], newMenuDyKeyId: Math.random()})
-  }
   /* 修正路径和URL导航 */
   routeHiFix = (props) => {
     //defaultSelectedKeys
@@ -70,44 +55,11 @@ class RootLayout extends React.Component {
         this.setState({defaultSelectedKeys: [arr[1]]})
     }
   }
-  hasPerssionAPI = () => {
-    if (this.props.permissionList == null) return false
-    for (let s of this.props.permissionList) {
-      if (s.name === "TOC_UPDATE") {
-        return true
-      }
-    }
-    return false
-  }
-  hasPerssionManage = () => {
-    if (this.props.permissionList == null) return false
-    for (let s of this.props.permissionList) {
-      if (s.name === "UPDATE" || s.name == "ADD") {
-        return true
-      }
-    }
-    return false
-  }
-  hasPerssionType = () => {
-    if (this.props.permissionList == null) return false
-    for (let s of this.props.permissionList) {
-      if (s.name === "TYPE_UPDATE") {
-        return true
-      }
-    }
-    return false
-  }
-  hasPerssionOpration = () => {
-    if (this.props.permissionList == null) return false
-    for (let s of this.props.permissionList) {
-      if (s.name === "OPERATION_UPDATE") {
-        return true
-      }
-    }
-    return false
-  }
+
 
   isRootPath = () => {
+    if (document.body.clientHeight < 500)
+      return false
     return window.location.hash === "#/?" || window.location.hash === "#/"
   }
 
@@ -134,68 +86,12 @@ class RootLayout extends React.Component {
       }
     }
 
-    const siderProps = {
-      siderFold,
-      darkTheme,
-      location,
-      changeTheme() {
-        dispatch({type: 'app/changeTheme'})
-      }
-    }
-    //style={{minHeight: calcContentHeight(showBread)}}
-    const calcContentHeight = (showBread) => {
-      let contentHeight = "";
-      if (document.body.clientHeight > 900)
-        contentHeight = "calc(100vh - 176px)"
-      else
-        contentHeight = "calc(100vh - 190px)"
-      return contentHeight;
-    }
-    const calcStyle = () => {
 
-    }
     let tmp = []
     for (let i = 0; i < 100; i++) {
       tmp.push(<div key={i}>AAAAAAA</div>)
     }
-    let pintMenu = (
-      <Menu key={this.state.newMenuDyKeyId} theme="dark" mode="inline" defaultSelectedKeys={this.state.defaultSelectedKeys} onClick={this.handleClickMenu} className="cus-sider-pint">
-        {!this.hasPerssionType() ? null : <Menu.Item key="types">
-          <Icon type="folder"/><Link to="types" style={{display: "inline-flex"}}><span className="nav-text">--</span></Link>
-        </Menu.Item>
-        }
-        <Menu.Item key="items">
-          <Icon type="appstore"/><Link to="items" style={{display: "inline-flex"}}><span className="nav-text">---</span></Link>
-        </Menu.Item>
-        {
-          !this.hasPerssionOpration() ? null : <Menu.Item key="operation">
-            <Icon type="flag"/><Link to="operation" style={{display: "inline-flex"}}> <span className="nav-text">操作管理<span className="beta-msg">beta</span></span></Link>
-          </Menu.Item>
-        }
-        {
-          !this.hasPerssionManage() ? null : <Menu.Item key="map">
-            <Icon type="line-chart"/><Link to="map" style={{display: "inline-flex"}}> <span className="nav-text">---</span></Link>
-          </Menu.Item>
-        }
-        {
-          !this.hasPerssionAPI() ? null : <Menu.Item key="api">
-            <Icon type="link"/><Link to="api" style={{display: "inline-flex"}}> <span className="nav-text">---</span></Link>
-          </Menu.Item>
-        }
 
-      </Menu>)
-    let typeMenu = null;
-    let pimTypes = this.props.pimTypes
-    if (pimTypes != null && pimTypes.length > 0) {
-      typeMenu = (
-        <Menu key={this.state.newMenuDyKeyIdDy} theme="dark" mode="inline" defaultSelectedKeys={this.state.defaultSelectedKeysDy} onClick={this.handleClickMenuDy}>
-          {pimTypes.map((item, i) => (
-            <Menu.Item key={i + ""}>
-              <Icon type="user"/><Link to={"types/" + item.typeShortName} style={{display: "inline-flex"}}><span className="nav-text">{item.typeName}</span></Link>
-            </Menu.Item>))
-          }
-        </Menu>)
-    }
 
     if (login) {
       return <div className={classnames("layout", "fold")}>
@@ -207,7 +103,7 @@ class RootLayout extends React.Component {
             {/*{typeMenu}*/}
             {/*{pintMenu}*/}
             {/*</Sider>*/}
-            <Layout style={{minHeight: "calc(100vh - 85px)"}}>
+            <Layout style={{minHeight: "calc(100vh - 79px)"}}>
               <Header style={{background: '#fff', padding: 0}}>
                 <Icon
                   className="trigger"
@@ -225,11 +121,12 @@ class RootLayout extends React.Component {
                   {/*<PimTypePage/>*/}
                   {/*<PimTypePage/>*/}
                 </Content>
-                {this.isRootPath() ? <Footer/> : null}
 
               </Content>
             </Layout>
           </Layout>
+          {this.isRootPath() ? <Footer/> : null}
+
         </div>
       </div>
     } else {
